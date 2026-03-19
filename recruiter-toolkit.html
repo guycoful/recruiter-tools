@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ערכת 10 כלים חכמים למגייסים — גיא כהן</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f8f9fc;
+  --bg-alt: #eef1f8;
+  --surface: #ffffff;
+  --border: rgba(0,0,0,0.07);
+  --text: #1a2332;
+  --text-sub: #4a5568;
+  --text-muted: #8896a7;
+  --gold: #d4860a;
+  --gold-light: #f5a623;
+  --blue: #2563eb;
+  --green: #059669;
+  --purple: #7c3aed;
+  --coral: #e11d48;
+  --radius: 16px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Heebo', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ═══════ HEADER ═══════ */
+.toolkit-header {
+  background: linear-gradient(135deg, #1a2332 0%, #2d3a4d 100%);
+  color: #fff;
+  padding: 60px 0 50px;
+  text-align: center;
+}
+
+.toolkit-header .badge {
+  display: inline-block;
+  background: rgba(245, 166, 35, 0.15);
+  border: 1px solid rgba(245, 166, 35, 0.3);
+  color: var(--gold-light);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 18px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+}
+
+.toolkit-header h1 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 800;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.toolkit-header p {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.7);
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+.toolkit-header .author {
+  margin-top: 24px;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.5);
+}
+
+/* ═══════ INTRO ═══════ */
+.intro {
+  padding: 48px 0 32px;
+}
+
+.intro p {
+  font-size: 1.05rem;
+  color: var(--text-sub);
+  max-width: 700px;
+}
+
+.intro p + p {
+  margin-top: 16px;
+}
+
+.intro strong {
+  color: var(--text);
+}
+
+/* ═══════ CATEGORY SECTION ═══════ */
+.category-section {
+  padding: 40px 0 20px;
+}
+
+.cat-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 28px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid;
+}
+
+.cat-label.blue { color: var(--blue); border-color: var(--blue); }
+.cat-label.green { color: var(--green); border-color: var(--green); }
+.cat-label.purple { color: var(--purple); border-color: var(--purple); }
+.cat-label.coral { color: var(--coral); border-color: var(--coral); }
+
+/* ═══════ TOOL CARD ═══════ */
+.tool {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  margin-bottom: 20px;
+  transition: box-shadow 0.3s ease;
+}
+
+.tool:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+.tool-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.tool-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.blue .tool-number { background: rgba(37,99,235,0.08); color: var(--blue); }
+.green .tool-number { background: rgba(5,150,105,0.08); color: var(--green); }
+.purple .tool-number { background: rgba(124,58,237,0.08); color: var(--purple); }
+.coral .tool-number { background: rgba(225,29,72,0.08); color: var(--coral); }
+
+.tool-top h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.tool-desc {
+  color: var(--text-sub);
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  line-height: 1.75;
+}
+
+.tool-details {
+  background: var(--bg-alt);
+  border-radius: 10px;
+  padding: 20px 22px;
+}
+
+.tool-details h4 {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+
+.tool-details ul {
+  list-style: none;
+  padding: 0;
+}
+
+.tool-details li {
+  font-size: 0.92rem;
+  color: var(--text-sub);
+  padding: 4px 0;
+  padding-right: 20px;
+  position: relative;
+}
+
+.tool-details li::before {
+  content: '✓';
+  position: absolute;
+  right: 0;
+  color: var(--green);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.tool-example {
+  margin-top: 14px;
+  background: rgba(255,255,255,0.6);
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 0.88rem;
+  color: var(--text-sub);
+}
+
+.tool-example strong {
+  color: var(--text);
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.85rem;
+}
+
+/* ═══════ CTA SECTION ═══════ */
+.cta-section {
+  background: linear-gradient(135deg, #1a2332 0%, #2d3a4d 100%);
+  color: #fff;
+  padding: 56px 0;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.cta-section h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.cta-section p {
+  color: rgba(255,255,255,0.7);
+  font-size: 1rem;
+  margin-bottom: 28px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--gold), #b8720a);
+  color: #fff;
+  font-family: 'Heebo', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 16px 36px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(212, 134, 10, 0.3);
+}
+
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 28px rgba(212, 134, 10, 0.4);
+}
+
+/* ═══════ DIVIDER ═══════ */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 20px 0;
+}
+
+/* ═══════ FOOTER ═══════ */
+footer {
+  padding: 32px 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+footer a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+/* ═══════ RESPONSIVE ═══════ */
+@media (max-width: 600px) {
+  .tool { padding: 24px 20px; }
+  .tool-details { padding: 16px 18px; }
+  .toolkit-header { padding: 48px 0 40px; }
+}
+
+/* ═══════ PRINT ═══════ */
+@media print {
+  body { background: #fff; }
+  .cta-section { display: none; }
+  .tool { break-inside: avoid; page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ HEADER ═══════ -->
+<header class="toolkit-header">
+  <div class="container">
+    <div class="badge">ערכה חינמית</div>
+    <h1>10 כלים חכמים למגייסים</h1>
+    <p>איך למצוא אנשים מהר יותר, לחסוך שעות של ניירת, ולשמור על מידע רגיש — בלי ידע טכני</p>
+    <div class="author">מאת גיא כהן · יועץ AI לעסקים · 2026</div>
+  </div>
+</header>
+
+<!-- ═══════ INTRO ═══════ -->
+<section class="intro">
+  <div class="container">
+    <p>אם יש לכם מאגר של מאות או אלפי מועמדים, ואתם עדיין מחפשים ידנית — הערכה הזו בשבילכם.</p>
+    <p>ריכזתי <strong>10 כלים שאפשר להתחיל להשתמש בהם מחר בבוקר</strong>. כל כלי מוסבר בשפה פשוטה, עם דוגמה מעשית, בלי מונחים טכניים.</p>
+    <p>הכלים מחולקים ל-4 קטגוריות: <strong>שליפת מועמדים</strong>, <strong>חיסול ניירת</strong>, <strong>תקשורת ופנייה</strong>, ו<strong>אבטחת מידע</strong>.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- CATEGORY 1: FINDING -->
+<!-- ═══════════════════════════════════════ -->
+<section class="category-section">
+  <div class="container">
+    <div class="cat-label blue">🔍 שליפה אקטיבית — מציאת אנשים</div>
+
+    <!-- Tool 1 -->
+    <div class="tool blue">
+      <div class="tool-top">
+        <div class="tool-number">01</div>
+        <h3>מנוע חיפוש מועמדים חכם</h3>
+      </div>
+      <p class="tool-desc">
+        במקום לפתוח עשרות אקסלים ולחפש בעין — מנוע חיפוש חכם סורק את כל המאגר שלכם ומוצא מועמדים לפי כישורים, ניסיון, מיקום וזמינות. כותבים מה מחפשים, מקבלים רשימה מסודרת.
+      </p>
+      <div class="tool-details">
+        <h4>איך זה עובד בפועל</h4>
+        <ul>
+          <li>מעלים את כל הקבצים למקום אחד (גוגל דרייב, תיקייה משותפת)</li>
+          <li>מחברים כלי חיפוש שסורק לפי מילות מפתח ותנאים</li>
+          <li>כותבים למשל: "מפתח עם 3+ שנות ניסיון, זמין, אזור מרכז"</li>
+          <li>מקבלים רשימה מדורגת עם שם, טלפון וקישור לפרופיל</li>
+        </ul>
+        <div class="tool-example">
+          <strong>דוגמה מהשטח:</strong>
+          מגייסת עם מאגר של 4,000 שמות חיפשה מנהל מכירות עם ניסיון בהייטק. במקום חצי יום עבודה — 3 דקות. 12 תוצאות רלוונטיות, כולל מועמד שהיה ברשימה שנתיים ולא ידעה עליו.
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool 2 -->
+    <div class="tool blue">
+      <div class="tool-top">
+        <div class="tool-number">02</div>
+        <h3>התאמה אוטומטית משרה–מועמד</h3>
+      </div>
+      <p class="tool-desc">
+        מזינים את דרישות המשרה — ומקבלים רשימה מדורגת של מועמדים מהמאגר, לפי אחוז התאמה. הכלי מבין לא רק מילים זהות אלא גם כישורים דומים ותפקידים קרובים.
+      </p>
+      <div class="tool-details">
+        <h4>איך זה עובד בפועל</h4>
+        <ul>
+          <li>מכניסים תיאור משרה או רשימת דרישות</li>
+          <li>הכלי משווה מול כל מועמד במאגר</li>
+          <li>מציג דירוג: 95% התאמה, 87% התאמה, 72% התאמה...</li>
+          <li>אפשר לסנן לפי זמינות, שכר מבוקש, מיקום</li>
+        </ul>
+        <div class="tool-example">
+          <strong>דוגמה מהשטח:</strong>
+          חברת גיוס קיבלה דרישה דחופה למנהלת שיווק דיגיטלי. במקום לפרסם מודעה ולחכות — תוך דקה קיבלו 8 מועמדות מהמאגר הקיים, 3 מהן בהתאמה של מעל 90%.
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool 3 -->
+    <div class="tool blue">
+      <div class="tool-top">
+        <div class="tool-number">03</div>
+        <h3>העלאת מועמדים רדומים</h3>
+      </div>
+      <p class="tool-desc">
+        מועמדים שדיברתם איתם לפני שנה או שנתיים — ולא היו מתאימים אז. אבל היום, עם ניסיון נוסף או שינוי קריירה, הם בדיוק מה שמחפשים. הכלי מעלה אותם מחדש.
+      </p>
+      <div class="tool-details">
+        <h4>איך זה עובד בפועל</h4>
+        <ul>
+          <li>סריקה של מועמדים שלא היו מתאימים בעבר</li>
+          <li>השוואה מחודשת מול משרות פתוחות היום</li>
+          <li>התראה: "למועמד הזה עכשיו יש את הניסיון שחסר אז"</li>
+          <li>שליפה אוטומטית של פרטי קשר ותיעוד קודם</li>
+        </ul>
+        <div class="tool-example">
+          <strong>דוגמה מהשטח:</strong>
+          מועמד שנדחה לתפקיד ניהול לפני שנה כי חסרו לו 2 שנות ניסיון — היום הוא מושלם. בלי הכלי, אף אחד לא היה נזכר בו.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- CATEGORY 2: AUTOMATION -->
+<!-- ═══════════════════════════════════════ -->
+<section class="category-section">
+  <div class="container">
+    <div class="cat-label green">⚡ חיסול הניירת — אוטומציה</div>
+
+    <!-- Tool 4 -->
+    <div class="tool green">
+      <div class="tool-top">
+        <div class="tool-number">04</div>
+        <h3>סיכום ראיון בלחיצה</h3>
+      </div>
+      <p class="tool-desc">
+        מקליטים שיחה (בטלפון או בזום) — ומקבלים סיכום מובנה עם נקודות חוזק, נקודות חולשה, התרשמות כללית, והמלצה. בלי לכתוב מילה בעצמכם.
+      </p>
+      <div class="tool-details">
+        <h4>איך זה עובד בפועל</h4>
+        <ul>
+          <li>מפעילים הקלטה בתחילת השיחה (אפליקציה או תוסף)</li>
+          <li>בסוף השיחה — הכלי מתמלל ומנתח את התוכן</li>
+          <li>מקבלים סיכום מסודר: חוזקות, חולשות, ציפיות שכר, זמינות</li>
+          <li>הסיכום נשמר אוטומטית בתיק המועמד</li>
+        </ul>
+        <div class="tool-example">
+          <strong>דוגמה מהשטח:</strong>
+          ראיון של 25 דקות הפך לסיכום של 8 שורות מדויקות. המגייסת שלחה אותו ללקוח תוך דקה אחרי שסיימה את השיחה — במקום לכתוב סיכום בעצמה בסוף היום (כשכבר שכחה חצי).
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool 5 -->
+    <div class="tool green">
+      <div class="tool-top">
+        <div class="tool-number">05</div>
+        <h3>כתיבת פרופיל מועמד ללקוח</h3>
+      </div>
+      <p class="tool-desc">
+        במקום לכתוב ידנית דוח על כל מועמד — הכלי יוצר פרופיל מקצועי מוכן לשליחה ללקוח. כולל סיכום, ניסיון רלוונטי, התאמה למשרה, וציטוטים מהראיון.
+      </p>
+      <div class="tool-details">
+        <h4>איך זה עובד בפועל</h4>
+        <ul>
+          <li>הכלי לוקח את קורות החיים + סיכום הראיון</li>
+          <li>מייצר דוח מקצועי בפורמט אחיד וממותג</li>
+          <li>כולל: סיכום מנהלים, ניסיון מרכזי, התרשמות, המלצה</li>
+          <li>אפשר לשלוח ישירות למייל של הלקוח</li>
+        </ul>
+        <div class="tool-example">
+          <strong>דוגמה מהשטח:</strong>
+          מגייס ששלח 5 מועמדים ללקוח — כל אחד עם פרופיל אחיד ומקצועי. הלקוח אמר: "מעולם לא קיבלתי חומר כל כך מסודר מחברת גיוס."
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool 6 -->
+    <div class="tool green">
+      <div class="tool-top">
+        <div class="tool-number">06</div>
+        <h3>מעקב סטטוסים אוטומטי</h3>
+      </div>
+      <p class="tool-desc">
+        לוח בקרה שמראה בדיוק איפה כל מועמד עומד בתהליך: פנייה ראשונה, ראיון טלפוני, ראיון אצל הלקוח, הצעה, סגירה. בלי לשאול אף אחד ובלי לחפש במיילים.
+      </p>
+      <div class="tool-details">
+        <h4>איך זה עובד בפועל</h4>
+        <ul>
+          <li>כל מועמד נכנס אוטומטית ללוח עם סטטוס נוכחי</li>
+          <li>כשמעדכנים שלב — הלוח מתעדכן בזמן אמת</li>
+          <li>תצוגה לפי משרה, לפי לקוח, או לפי שלב בתהליך</li>
+          <li>דוח שבועי אוטומטי: כמה בכל שלב, מה תקוע, מה מתקדם</li>
+        </ul>
+        <div class="tool-example">
+          <strong>דוגמה מהשטח:</strong>
+          במקום 3 אקסלים ו-15 שיחות טלפון ביום — מבט אחד על הלוח. בעלת חברת גיוס ראתה מיד ש-4 מועמדים תקועים בשלב "ממתין לתשובת לקוח" כבר שבוע — וטיפלה בזה באותו יום.
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool 7 -->
+    <div class="tool green">
+      <div class="tool-top">
+        <div class="tool-number">07</div>
+        <h3>תזכורות מעקב חכמות</h3>
+      </div>
+      <p class="tool-desc">
+        המערכת יודעת מתי צריך לחזור למועמד, ללקוח, או לבדוק סטטוס. היא שולחת לכם תזכורת בדיוק ברגע הנכון — לפני שמישהו נשכח.
+      </p>
+      <div class="tool-details">
+        <h4>איך זה עובד בפועל</h4>
+        <ul>
+          <li>מגדירים חוקים: "אם עברו 3 ימים בלי תשובה — תזכורת"</li>
+          <li>תזכורות מגיעות למייל, לוואטסאפ, או ישירות ללוח</li>
+          <li>כוללות הקשר: שם המועמד, מה היה השלב האחרון, מה צריך לעשות</li>
+          <li>אפשר לדחות, לסמן כטופל, או להגדיר פעולה חדשה</li>
+        </ul>
+        <div class="tool-example">
+          <strong>דוגמה מהשטח:</strong>
+          מגייסת שכחה לחזור למועמדת אחרי ראיון. המועמדת הלכה למתחרה. עם הכלי — אחרי 48 שעות בדיוק הגיעה תזכורת: "לחזור לשרית כהן — ראיון בוצע ביום ראשון, ממתינה לתשובה."
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- CATEGORY 3: COMMUNICATION -->
+<!-- ═══════════════════════════════════════ -->
+<section class="category-section">
+  <div class="container">
+    <div class="cat-label purple">💬 תקשורת ופנייה</div>
+
+    <!-- Tool 8 -->
+    <div class="tool purple">
+      <div class="tool-top">
+        <div class="tool-number">08</div>
+        <h3>הודעות פנייה מותאמות אישית</h3>
+      </div>
+      <p class="tool-desc">
+        כשפונים ל-50 מועמדים ביום, קשה לכתוב הודעה אישית לכל אחד. הכלי יוצר הודעות שמרגישות אישיות — עם שם, תפקיד, וסיבה ספציפית למה פנינו — בקנה מידה גדול.
+      </p>
+      <div class="tool-details">
+        <h4>איך זה עובד בפועל</h4>
+        <ul>
+          <li>מכניסים רשימת מועמדים עם פרטים בסיסיים</li>
+          <li>בוחרים סגנון: רשמי, ידידותי, ישיר</li>
+          <li>הכלי מייצר הודעה מותאמת לכל אחד — עם שם, ניסיון, ומשרה רלוונטית</li>
+          <li>אפשר לשלוח ישירות דרך לינקדאין או וואטסאפ</li>
+        </ul>
+        <div class="tool-example">
+          <strong>דוגמה מהשטח:</strong>
+          הודעה שנראית ככה: "היי דנה, ראיתי שאת מנהלת שיווק ב-XYZ כבר 3 שנים. יש לי משרה שנפתחה בדיוק בתחום שלך — אשמח לספר." אחוז המענה עלה מ-12% ל-34%.
+        </div>
+      </div>
+    </div>
+
+    <!-- Tool 9 -->
+    <div class="tool purple">
+      <div class="tool-top">
+        <div class="tool-number">09</div>
+        <h3>בוט קבלת מועמדים</h3>
+      </div>
+      <p class="tool-desc">
+        מועמד חדש שפונה אליכם מקבל מיד הודעת קבלה חמה + שאלון ראשוני קצר. אתם מקבלים את המידע מסודר — בלי לענות ידנית לכל פנייה.
+      </p>
+      <div class="tool-details">
+        <h4>איך זה עובד בפועל</h4>
+        <ul>
+          <li>מועמד שולח הודעה → מקבל מיד: "קיבלנו! הנה כמה שאלות קצרות"</li>
+          <li>שאלון: תחום, שנות ניסיון, ציפיות שכר, זמינות</li>
+          <li>התשובות נכנסות אוטומטית לטבלה מסודרת</li>
+          <li>אתם מקבלים התראה רק כשיש מועמד שמתאים לאחת המשרות הפתוחות</li>
+        </ul>
+        <div class="tool-example">
+          <strong>דוגמה מהשטח:</strong>
+          בוט בוואטסאפ שקיבל 40 פניות בשבוע. 28 מהן מילאו את השאלון. 11 התאימו למשרות פתוחות. המגייסת התעסקה רק עם ה-11 הרלוונטיים — במקום עם כל ה-40.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- CATEGORY 4: BONUS TOOL -->
+<!-- ═══════════════════════════════════════ -->
+<section class="category-section">
+  <div class="container">
+    <div class="cat-label coral">🎁 בונוס — כלי חינמי שאפשר לנסות עכשיו</div>
+
+    <!-- Tool 10 -->
+    <div class="tool coral" style="border: 2px solid rgba(225,29,72,0.25); background: linear-gradient(135deg, #fff 0%, #fff5f6 100%);">
+      <div class="tool-top">
+        <div class="tool-number">10</div>
+        <h3>סורק קורות חיים AI — בוט חינמי בטלגרם</h3>
+      </div>
+      <p class="tool-desc">
+        זה הכלי שהכי הפתיע את המגייסים שעבדתי איתם. בוט בטלגרם שעושה דבר אחד ועושה אותו מצוין: <strong>סינון ודירוג קורות חיים מול דרישות משרה</strong>. חינם לגמרי, עובד בעברית, ואפשר לנסות עכשיו.
+      </p>
+      <div class="tool-details">
+        <h4>מה הבוט עושה</h4>
+        <ul>
+          <li>שולחים לו דרישות משרה (חובה + יתרון)</li>
+          <li>מדביקים קורות חיים (טקסט, אפשר כמה ביחד)</li>
+          <li>מקבלים דירוג 0-100 עם פירוט: חוזקות, חולשות, פערים</li>
+          <li>טבלת השוואה בין מועמדים — מי הכי מתאים ולמה</li>
+          <li>זיהוי דגלים אדומים: פערים בתעסוקה, חוסר עקביות</li>
+          <li>הכנת שאלות לראיון טלפוני — מותאמות למשרה</li>
+        </ul>
+        <div class="tool-example">
+          <strong>דוגמה אמיתית:</strong>
+          מגייסת שלחה 40 קורות חיים למשרת Full Stack בכיר. תוך 5 דקות קיבלה טבלת Top 5 עם ציונים, נימוקים, ורשימת "אולי". עבודה שלוקחת 6-7 שעות ידנית — נגמרה ב-5 דקות.
+        </div>
+      </div>
+      <div style="margin-top: 20px; padding: 20px 22px; background: rgba(225,29,72,0.06); border-radius: 10px; text-align: center;">
+        <p style="font-weight: 700; font-size: 1.05rem; margin-bottom: 12px; color: var(--coral);">נסו את הבוט עכשיו — חינם:</p>
+        <a href="https://t.me/resumescrenerbot" target="_blank" style="display: inline-block; background: linear-gradient(135deg, #e11d48, #be123c); color: #fff; padding: 14px 32px; border-radius: 100px; text-decoration: none; font-weight: 700; font-size: 1rem; box-shadow: 0 4px 16px rgba(225,29,72,0.25); transition: all 0.3s ease;">
+          פתחו את הבוט בטלגרם ←
+        </a>
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 10px;">לא צריך הרשמה. פותחים, שולחים דרישות + קורות חיים, ומקבלים תוצאות.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CTA ═══════ -->
+<section class="cta-section">
+  <div class="container">
+    <h2>רוצים להטמיע את הכלים האלה אצלכם?</h2>
+    <p>אני עוזר למגייסים ולחברות גיוס לבנות את המערכות האלה — מותאם אישית לעסק שלכם. בלי קוד, בלי סיבוכים.</p>
+    <a href="https://wa.me/972544969518?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%A7%D7%99%D7%91%D7%9C%D7%AA%D7%99%20%D7%90%D7%AA%20%D7%94%D7%A2%D7%A8%D7%9B%D7%94%20%D7%A9%D7%9C%2010%20%D7%94%D7%9B%D7%9C%D7%99%D7%9D%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93" class="cta-btn" target="_blank">שלחו לי הודעה בוואטסאפ ←</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>© 2026 גיא כהן — יועץ AI לעסקים</p>
+    <p><a href="https://www.linkedin.com/in/guycohen-ai/" target="_blank">עקבו אחריי בלינקדאין</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

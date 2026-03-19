@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10 כלים חכמים למגייסים — גיא כהן</title>
+<meta name="description" content="ערכה חינמית: 10 כלים חכמים שכל מגייס חייב להכיר. למצוא מועמדים מהר יותר, לסכם ראיונות בלחיצה, ולשמור על מידע רגיש.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --navy-deep: #f5f7fb;
+  --navy: #edf0f7;
+  --navy-light: #e4e8f2;
+  --navy-mid: #dce1ed;
+  --gold: #d4860a;
+  --gold-light: #f5a623;
+  --gold-dim: rgba(212, 134, 10, 0.1);
+  --text-primary: #1a2332;
+  --text-secondary: #4a5568;
+  --text-muted: #8896a7;
+  --blue: #2563eb;
+  --blue-bg: rgba(37, 99, 235, 0.06);
+  --blue-border: rgba(37, 99, 235, 0.18);
+  --green: #059669;
+  --green-bg: rgba(5, 150, 105, 0.06);
+  --green-border: rgba(5, 150, 105, 0.18);
+  --purple: #7c3aed;
+  --purple-bg: rgba(124, 58, 237, 0.06);
+  --purple-border: rgba(124, 58, 237, 0.18);
+  --coral: #e11d48;
+  --coral-bg: rgba(225, 29, 72, 0.06);
+  --coral-border: rgba(225, 29, 72, 0.18);
+  --glass: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Heebo', sans-serif;
+  background: var(--navy-deep);
+  color: var(--text-primary);
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════ NOISE TEXTURE OVERLAY ═══════ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.015'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ═══════ AMBIENT GLOW ═══════ */
+.glow-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glow-1 {
+  width: 600px;
+  height: 600px;
+  background: rgba(37, 99, 235, 0.04);
+  top: -200px;
+  right: -200px;
+}
+
+.glow-2 {
+  width: 500px;
+  height: 500px;
+  background: rgba(212, 134, 10, 0.04);
+  bottom: 20%;
+  left: -150px;
+}
+
+/* ═══════ LAYOUT ═══════ */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+section {
+  padding: 80px 0;
+}
+
+/* ═══════ HERO ═══════ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 0 80px;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(to top, var(--navy-deep), transparent);
+  z-index: 0;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gold-dim);
+  border: 1px solid rgba(245, 166, 35, 0.3);
+  border-radius: 100px;
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gold);
+  margin-bottom: 32px;
+  animation: fadeInDown 0.8s ease both;
+}
+
+.hero-badge::before {
+  content: '✦';
+  font-size: 12px;
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 24px;
+  animation: fadeInDown 0.8s ease 0.15s both;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--gold) 50%, var(--text-primary) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeInDown 0.8s ease 0.15s both, shimmer 6s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 200% center; }
+  50% { background-position: 0% center; }
+}
+
+.hero-sub {
+  font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 40px;
+  font-weight: 300;
+  animation: fadeInDown 0.8s ease 0.3s both;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--gold), #b8720a);
+  color: #fff;
+  font-family: 'Heebo', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  padding: 18px 40px;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 24px rgba(212, 134, 10, 0.3);
+  animation: fadeInDown 0.8s ease 0.45s both;
+}
+
+.hero-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(212, 134, 10, 0.4);
+}
+
+.hero-cta::after {
+  content: '↓';
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.hero-cta:hover::after {
+  transform: translateY(3px);
+}
+
+.hero-trust {
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  animation: fadeInDown 0.8s ease 0.6s both;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ═══════ PROBLEM SECTION ═══════ */
+.problem {
+  background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 50%, var(--navy-deep) 100%);
+}
+
+.section-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.pain-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.pain-card {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.pain-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(225, 29, 72, 0.3), transparent);
+}
+
+.pain-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(225, 29, 72, 0.15);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+.pain-icon {
+  font-size: 2rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.pain-card h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.pain-card p {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* ═══════ TOOLS SECTION ═══════ */
+.tools {
+  padding-top: 40px;
+}
+
+.category {
+  margin-bottom: 64px;
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.category-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.cat-blue .category-icon { background: var(--blue-bg); border: 1px solid var(--blue-border); }
+.cat-green .category-icon { background: var(--green-bg); border: 1px solid var(--green-border); }
+.cat-purple .category-icon { background: var(--purple-bg); border: 1px solid var(--purple-border); }
+.cat-coral .category-icon { background: var(--coral-bg); border: 1px solid var(--coral-border); }
+
+.category-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.cat-blue .category-header h3 { color: var(--blue); }
+.cat-green .category-header h3 { color: var(--green); }
+.cat-purple .category-header h3 { color: var(--purple); }
+.cat-coral .category-header h3 { color: var(--coral); }
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.tool-card {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.35s ease;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.tool-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.cat-blue .tool-card:hover { border-color: var(--blue-border); }
+.cat-green .tool-card:hover { border-color: var(--green-border); }
+.cat-purple .tool-card:hover { border-color: var(--purple-border); }
+.cat-coral .tool-card:hover { border-color: var(--coral-border); }
+
+.tool-num {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.cat-blue .tool-num { background: var(--blue-bg); color: var(--blue); border: 1px solid var(--blue-border); }
+.cat-green .tool-num { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+.cat-purple .tool-num { background: var(--purple-bg); color: var(--purple); border: 1px solid var(--purple-border); }
+.cat-coral .tool-num { background: var(--coral-bg); color: var(--coral); border: 1px solid var(--coral-border); }
+
+.tool-content h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.tool-content p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ═══════ ABOUT SECTION ═══════ */
+.about {
+  background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 100%);
+}
+
+.about-card {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 48px 40px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.about-card p {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.trust-badges {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.trust-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.trust-badge .number {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--gold);
+}
+
+.trust-badge .label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ═══════ FORM SECTION ═══════ */
+.form-section {
+  background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+  padding-bottom: 60px;
+}
+
+.form-wrapper {
+  max-width: 520px;
+  margin: 0 auto;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 48px 40px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+}
+
+.form-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+}
+
+.form-wrapper h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.form-wrapper .form-sub {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 32px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.form-group label .optional {
+  font-weight: 300;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.form-group input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  font-family: 'Heebo', sans-serif;
+  font-size: 1rem;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  direction: rtl;
+}
+
+.form-group input::placeholder {
+  color: var(--text-muted);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(212, 134, 10, 0.15);
+}
+
+.form-submit {
+  width: 100%;
+  background: linear-gradient(135deg, var(--gold), #b8720a);
+  color: #fff;
+  font-family: 'Heebo', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 16px;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(212, 134, 10, 0.25);
+  margin-top: 8px;
+}
+
+.form-submit:hover {
+  box-shadow: 0 6px 28px rgba(212, 134, 10, 0.35);
+  transform: translateY(-1px);
+}
+
+.form-privacy {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 16px;
+}
+
+.form-privacy::before {
+  content: '🔒 ';
+}
+
+/* Thank you state */
+.thank-you {
+  display: none;
+  text-align: center;
+  padding: 40px 0;
+}
+
+.thank-you.active {
+  display: block;
+}
+
+.thank-you .check {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--green-bg);
+  border: 2px solid var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 0 auto 20px;
+  animation: scaleIn 0.4s ease both;
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+.thank-you h3 {
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+  color: var(--green);
+}
+
+.thank-you p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+.form-content.hidden {
+  display: none;
+}
+
+/* ═══════ FOOTER ═══════ */
+footer {
+  padding: 32px 0;
+  text-align: center;
+  border-top: 1px solid var(--glass-border);
+}
+
+footer p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+footer a {
+  font-size: 0.85rem;
+  color: var(--gold);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+footer a:hover {
+  color: var(--gold-light);
+}
+
+/* ═══════ SCROLL ANIMATIONS ═══════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════ RESPONSIVE ═══════ */
+@media (max-width: 768px) {
+  section {
+    padding: 60px 0;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 100px 0 60px;
+  }
+
+  .pain-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tool-card {
+    padding: 22px 20px;
+  }
+
+  .about-card {
+    padding: 32px 24px;
+  }
+
+  .trust-badges {
+    gap: 24px;
+  }
+
+  .form-wrapper {
+    padding: 36px 24px;
+  }
+
+  .hero-cta {
+    padding: 16px 32px;
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .tool-card {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+/* ═══════ DIAGONAL SEPARATOR ═══════ */
+.separator {
+  height: 80px;
+  background: linear-gradient(180deg, var(--navy-deep), var(--navy));
+  clip-path: polygon(0 0, 100% 40%, 100% 100%, 0 60%);
+}
+</style>
+</head>
+<body>
+
+<!-- Ambient glows -->
+<div class="glow-orb glow-1"></div>
+<div class="glow-orb glow-2"></div>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">ערכה חינמית למגייסים</div>
+    <h1>10 כלים חכמים<br>שכל מגייס חייב להכיר</h1>
+    <p class="hero-sub">למצוא מועמדים מהר יותר. לסכם ראיונות בלחיצה.<br>בלי שמידע ידלוף.</p>
+    <a href="#form" class="hero-cta">שלחו לי את הערכה בחינם</a>
+    <p class="hero-trust">ללא עלות · ללא התחייבות · מתחילים מחר בבוקר</p>
+  </div>
+</section>
+
+<!-- ═══════ PROBLEM ═══════ -->
+<section class="problem">
+  <div class="container">
+    <div class="section-label reveal">הבעיה</div>
+    <h2 class="section-title reveal">מכירים את זה?</h2>
+    <div class="pain-grid">
+      <div class="pain-card reveal">
+        <span class="pain-icon">📁</span>
+        <h3>אלפי שמות קבורים באקסלים</h3>
+        <p>מועמדים מעולים שכבר יש לכם — אבל אי אפשר למצוא אותם בין התיקיות, האקסלים וההודעות הישנות.</p>
+      </div>
+      <div class="pain-card reveal">
+        <span class="pain-icon">⏳</span>
+        <h3>חצי יום על חיפוש ידני</h3>
+        <p>קריאת מסמכים, כתיבת סיכומים, העתקה בין מערכות. שעות שהיו יכולות ללכת לשיחות עם מועמדים ולקוחות.</p>
+      </div>
+      <div class="pain-card reveal">
+        <span class="pain-icon">🏃</span>
+        <h3>מתחרה סגר את העסקה</h3>
+        <p>המועמד המושלם היה אצלכם ברשימה — אבל מישהו אחר הגיע אליו קודם. פשוט כי הוא עבד עם מערכת חכמה יותר.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ 10 TOOLS ═══════ -->
+<section class="tools">
+  <div class="container">
+    <div class="section-label reveal">הפתרון</div>
+    <h2 class="section-title reveal">10 הכלים שישנו לכם את העבודה</h2>
+
+    <!-- Category 1: Blue -->
+    <div class="category cat-blue reveal">
+      <div class="category-header">
+        <div class="category-icon">🔍</div>
+        <h3>שליפה אקטיבית — מציאת אנשים</h3>
+      </div>
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-num">01</div>
+          <div class="tool-content">
+            <h4>מנוע חיפוש מועמדים חכם</h4>
+            <p>חיפוש בתוך המאגר הקיים לפי כישורים, ניסיון וזמינות. במקום לעבור אקסלים ידנית.</p>
+          </div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-num">02</div>
+          <div class="tool-content">
+            <h4>התאמה אוטומטית משרה–מועמד</h4>
+            <p>מזינים דרישות משרה, מקבלים רשימה מדורגת של מועמדים מתאימים. בדקות, לא בשעות.</p>
+          </div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-num">03</div>
+          <div class="tool-content">
+            <h4>העלאת מועמדים רדומים</h4>
+            <p>סריקה של מועמדים ישנים שלא היו רלוונטיים אז — אבל מתאימים בול עכשיו.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category 2: Green -->
+    <div class="category cat-green reveal">
+      <div class="category-header">
+        <div class="category-icon">⚡</div>
+        <h3>חיסול הניירת — אוטומציה</h3>
+      </div>
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-num">04</div>
+          <div class="tool-content">
+            <h4>סיכום ראיון בלחיצה</h4>
+            <p>מקליטים שיחה, מקבלים סיכום מובנה עם נקודות חוזק וחולשה. בלי לכתוב מילה.</p>
+          </div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-num">05</div>
+          <div class="tool-content">
+            <h4>כתיבת פרופיל מועמד ללקוח</h4>
+            <p>יצירה אוטומטית של דוח מועמד מקצועי לשליחה למעסיק. מוכן תוך שניות.</p>
+          </div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-num">06</div>
+          <div class="tool-content">
+            <h4>מעקב סטטוסים אוטומטי</h4>
+            <p>לוח בקרה שמראה בדיוק איפה כל מועמד עומד בתהליך. בלי לשאול אף אחד.</p>
+          </div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-num">07</div>
+          <div class="tool-content">
+            <h4>תזכורות מעקב חכמות</h4>
+            <p>המערכת מתריעה מתי לחזור למי. אף מועמד לא נשכח, אף עסקה לא נופלת.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category 3: Purple -->
+    <div class="category cat-purple reveal">
+      <div class="category-header">
+        <div class="category-icon">💬</div>
+        <h3>תקשורת ופנייה</h3>
+      </div>
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-num">08</div>
+          <div class="tool-content">
+            <h4>הודעות פנייה מותאמות אישית</h4>
+            <p>הודעות לינקדאין ווואטסאפ שמרגישות אישיות — בקנה מידה גדול. בלי העתק-הדבק.</p>
+          </div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-num">09</div>
+          <div class="tool-content">
+            <h4>בוט קבלת מועמדים</h4>
+            <p>מועמד חדש מקבל הודעת קבלה ושאלון ראשוני אוטומטית. רושם ראשוני מקצועי, בלי מאמץ.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category 4: Coral — BONUS TOOL -->
+    <div class="category cat-coral reveal">
+      <div class="category-header">
+        <div class="category-icon">🎁</div>
+        <h3>בונוס — כלי חינמי שאפשר לנסות עכשיו</h3>
+      </div>
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-num">10</div>
+          <div class="tool-content">
+            <h4>סורק קורות חיים AI — בוט חינמי בטלגרם</h4>
+            <p>שולחים דרישות משרה + קורות חיים → מקבלים דירוג 0-100, טבלת השוואה, וזיהוי פערים. עובד בעברית, חינם לגמרי. <strong>נסו עכשיו →</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ ABOUT ═══════ -->
+<section class="about">
+  <div class="container">
+    <div class="about-card reveal">
+      <div class="section-label">מי מאחורי הערכה?</div>
+      <h3>גיא כהן</h3>
+      <p>יועץ שעוזר למגייסים לעבוד חכם יותר עם כלים שפשוט עובדים.<br>בלי קוד, בלי מונחים טכניים מסובכים. פשוט תוצאות.</p>
+      <div class="trust-badges">
+        <div class="trust-badge">
+          <span class="number">+30</span>
+          <span class="label">עסקים שכבר עובדים אחרת</span>
+        </div>
+        <div class="trust-badge">
+          <span class="number">+600</span>
+          <span class="label">חברי קהילה</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FORM ═══════ -->
+<section class="form-section" id="form">
+  <div class="container">
+    <div class="form-wrapper reveal">
+      <div class="form-content" id="formContent">
+        <h3>רוצים את הערכה המלאה?</h3>
+        <p class="form-sub">השאירו פרטים ואשלח לכם את 10 הכלים ישירות</p>
+        <form id="leadForm" onsubmit="return false;">
+          <div class="form-group">
+            <label>שם מלא</label>
+            <input type="text" id="leadName" placeholder="איך קוראים לכם?" required>
+          </div>
+          <div class="form-group">
+            <label>אימייל</label>
+            <input type="email" id="leadEmail" placeholder="הכתובת שאליה נשלח את הערכה" required>
+          </div>
+          <div class="form-group">
+            <label>טלפון <span class="optional">(לא חובה)</span></label>
+            <input type="tel" id="leadPhone" placeholder="לוואטסאפ — אם מעדיפים לקבל לשם">
+          </div>
+          <button type="button" class="form-submit" id="submitBtn" onclick="submitForm()">שלחו לי את 10 הכלים</button>
+          <p class="form-error" id="formError" style="display:none;text-align:center;color:var(--coral);font-size:0.85rem;margin-top:12px;"></p>
+        </form>
+        <p class="form-privacy">המידע שלכם בטוח. לא נשלח ספאם. נקודה.</p>
+      </div>
+      <div class="thank-you" id="thankYou">
+        <div class="check">✓</div>
+        <h3>הערכה מוכנה!</h3>
+        <p>לחצו על הכפתור למטה כדי לפתוח את הערכה המלאה.</p>
+        <a href="recruiter-toolkit.html" target="_blank" class="hero-cta" style="margin-top:20px;display:inline-flex;">פתחו את 10 הכלים</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+  <div class="container">
+    <p>© 2026 גיא כהן — יועץ AI לעסקים</p>
+    <a href="https://www.linkedin.com/in/guycohen-ai/" target="_blank" rel="noopener">עקבו אחריי בלינקדאין ←</a>
+  </div>
+</footer>
+
+<script>
+// ═══════ SUPABASE CONFIG ═══════
+const SUPABASE_URL = 'https://vuvavjmbvdqnwtleudqh.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ1dmF2am1idmRxbnd0bGV1ZHFoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE0NDY1MTMsImV4cCI6MjA2NzAyMjUxM30.QgtlrWs_qL7dMzxHkdUQaCBkGWsNNnExDv0phGz7NbI';
+
+// ═══════ FORM SUBMIT ═══════
+async function submitForm() {
+  const formContent = document.getElementById('formContent');
+  const thanks = document.getElementById('thankYou');
+  const btn = document.getElementById('submitBtn');
+  const errorEl = document.getElementById('formError');
+
+  const name = document.getElementById('leadName').value.trim();
+  const email = document.getElementById('leadEmail').value.trim();
+  const phone = document.getElementById('leadPhone').value.trim();
+
+  // Validate
+  errorEl.style.display = 'none';
+  let valid = true;
+
+  if (!name) {
+    document.getElementById('leadName').style.borderColor = 'var(--coral)';
+    valid = false;
+  }
+  if (!email) {
+    document.getElementById('leadEmail').style.borderColor = 'var(--coral)';
+    valid = false;
+  }
+
+  if (!valid) {
+    setTimeout(() => {
+      document.querySelectorAll('input').forEach(i => i.style.borderColor = '');
+    }, 2000);
+    return;
+  }
+
+  // Disable button while sending
+  btn.disabled = true;
+  btn.textContent = 'שולח...';
+
+  try {
+    const res = await fetch(SUPABASE_URL + '/rest/v1/recruiter_leads', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        phone: phone || null,
+        source: 'landing_page'
+      })
+    });
+
+    if (!res.ok) throw new Error('שגיאה בשמירה');
+
+    // Send email with toolkit link (fire-and-forget)
+    fetch(SUPABASE_URL + '/functions/v1/send-toolkit-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: name, email: email })
+    }).catch(() => {}); // don't block UI if email fails
+
+    // Success — show toolkit link
+    formContent.classList.add('hidden');
+    thanks.classList.add('active');
+
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = 'שלחו לי את 10 הכלים';
+    errorEl.textContent = 'משהו השתבש, נסו שוב או שלחו הודעה ישירות בוואטסאפ';
+    errorEl.style.display = 'block';
+  }
+}
+
+// ═══════ SCROLL REVEAL ═══════
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, {
+  threshold: 0.1,
+  rootMargin: '0px 0px -40px 0px'
+});
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
