@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ערכת AI מאובטח למגייסים - ₪197 | גיא כהן</title>
+<meta name="description" content="10 כלים + פרומפטים מוכנים + הוראות שלב-אחר-שלב. ערכת AI מאובטח למגייסים בגרסה המלאה.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy-deep: #f5f7fb;
+  --navy: #edf0f7;
+  --gold: #d4860a;
+  --gold-light: #f5a623;
+  --gold-dim: rgba(212, 134, 10, 0.1);
+  --text-primary: #1a2332;
+  --text-secondary: #4a5568;
+  --text-muted: #8896a7;
+  --green: #059669;
+  --green-bg: rgba(5, 150, 105, 0.06);
+  --green-border: rgba(5, 150, 105, 0.18);
+  --glass: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Heebo', sans-serif;
+  background: var(--navy-deep);
+  color: var(--text-primary);
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.015'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glow-orb { position: fixed; border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: 0; }
+.glow-1 { width: 600px; height: 600px; background: rgba(37, 99, 235, 0.04); top: -200px; right: -200px; }
+.glow-2 { width: 500px; height: 500px; background: rgba(212, 134, 10, 0.04); bottom: 20%; left: -150px; }
+
+.container { max-width: 720px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+/* ═══════ HERO ═══════ */
+.hero {
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 0 40px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gold-dim);
+  border: 1px solid rgba(245, 166, 35, 0.3);
+  border-radius: 100px;
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 28px;
+}
+
+.hero h1 {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 800;
+  line-height: 1.25;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--gold) 50%, var(--text-primary) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 6s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 200% center; }
+  50% { background-position: 0% center; }
+}
+
+.hero-sub {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 550px;
+  margin: 0 auto;
+  font-weight: 300;
+}
+
+/* ═══════ WHAT YOU GET ═══════ */
+.features {
+  padding: 40px 0;
+}
+
+.features-card {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 40px 36px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.features-card h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.feature-list {
+  list-style: none;
+  margin-bottom: 0;
+}
+
+.feature-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--glass-border);
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.feature-list li:last-child { border-bottom: none; }
+
+.feature-list li::before {
+  content: '✓';
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--green-bg);
+  border: 1px solid var(--green-border);
+  color: var(--green);
+  font-weight: 700;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.feature-list li strong { color: var(--text-primary); }
+
+/* ═══════ PRICING ═══════ */
+.pricing {
+  padding: 40px 0 60px;
+}
+
+.pricing-card {
+  background: linear-gradient(135deg, #1a2332, #243044);
+  border: 1px solid rgba(212, 134, 10, 0.3);
+  border-radius: var(--radius);
+  padding: 48px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+}
+
+.pricing-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold-light);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.pricing-amount {
+  font-size: clamp(3rem, 8vw, 4.5rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.pricing-amount span {
+  font-size: 0.4em;
+  font-weight: 400;
+  color: rgba(255,255,255,0.5);
+  vertical-align: super;
+}
+
+.pricing-note {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 32px;
+}
+
+.pay-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 400px;
+  background: linear-gradient(135deg, var(--gold), #b8720a);
+  color: #fff;
+  font-family: 'Heebo', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 20px 40px;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 24px rgba(212, 134, 10, 0.4);
+  margin-bottom: 20px;
+}
+
+.pay-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(212, 134, 10, 0.5);
+}
+
+.pay-methods {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.pay-method {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.6);
+}
+
+.pricing-guarantee {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  max-width: 400px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ═══════ HOW IT WORKS ═══════ */
+.how-it-works {
+  padding: 0 0 60px;
+}
+
+.how-card {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 36px 32px;
+}
+
+.how-card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.how-steps {
+  list-style: none;
+  counter-reset: how-step;
+}
+
+.how-steps li {
+  counter-increment: how-step;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 16px;
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.how-steps li::before {
+  content: counter(how-step);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), #b8720a);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.how-steps li strong { color: var(--text-primary); }
+
+/* ═══════ ABOUT ═══════ */
+.about {
+  padding: 0 0 60px;
+}
+
+.about-card {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 36px 32px;
+  text-align: center;
+}
+
+.about-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; }
+
+.about-card p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.trust-row {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.trust-item { text-align: center; }
+.trust-item .num { font-size: 1.6rem; font-weight: 800; color: var(--gold); }
+.trust-item .lbl { font-size: 0.8rem; color: var(--text-muted); }
+
+/* ═══════ FAQ ═══════ */
+.faq {
+  padding: 0 0 60px;
+}
+
+.faq h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.faq-item {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  padding: 20px 24px;
+  margin-bottom: 12px;
+}
+
+.faq-q {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.faq-a {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ═══════ BOTTOM CTA ═══════ */
+.bottom-cta {
+  padding: 0 0 80px;
+  text-align: center;
+}
+
+.bottom-cta .pay-btn {
+  box-shadow: 0 4px 24px rgba(212, 134, 10, 0.3);
+}
+
+/* ═══════ FOOTER ═══════ */
+footer {
+  padding: 32px 0;
+  text-align: center;
+  border-top: 1px solid var(--glass-border);
+}
+
+footer p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px; }
+footer a { font-size: 0.85rem; color: var(--gold); text-decoration: none; }
+footer a:hover { color: var(--gold-light); }
+
+/* ═══════ RESPONSIVE ═══════ */
+@media (max-width: 768px) {
+  .hero { padding: 60px 0 30px; min-height: auto; }
+  .pricing-card { padding: 36px 24px; }
+  .features-card { padding: 28px 20px; }
+  .pay-btn { font-size: 1.1rem; padding: 18px 32px; }
+}
+
+@media (max-width: 400px) {
+  .container { padding: 0 16px; }
+  .trust-row { gap: 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="glow-orb glow-1"></div>
+<div class="glow-orb glow-2"></div>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">הגרסה המלאה - 10 כלים מוכנים</div>
+    <h1>ערכת AI מאובטח למגייסים</h1>
+    <p class="hero-sub">פרומפטים מוכנים להעתקה, הוראות שלב-אחר-שלב, טמפלייט Google Sheets, ובוט טלגרם. הכל נבדק, הכל בטוח, הכל בעברית.</p>
+  </div>
+</section>
+
+<!-- ═══════ WHAT YOU GET ═══════ -->
+<section class="features">
+  <div class="container">
+    <div class="features-card">
+      <h2>מה כולל בערכה?</h2>
+      <ul class="feature-list">
+        <li><strong>3 כלי חיפוש חכמים</strong> - מוצאים מועמדים מהמאגר הקיים תוך שניות, מדרגים 0-100, ומגלים מועמדים "רדומים" ששכחתם</li>
+        <li><strong>סיכום ראיון בלחיצה</strong> - מקליטים ראיון, מקבלים סיכום מובנה עם חוזקות, חולשות, ציפיות שכר, והמלצה</li>
+        <li><strong>דוח מועמד מקצועי</strong> - יוצרים דוח ללקוח שנראה כאילו השקעתם שעה, תוך 30 שניות</li>
+        <li><strong>טמפלייט מעקב מועמדים</strong> - Google Sheets מוכן עם צבעים אוטומטיים לפי סטטוס</li>
+        <li><strong>תזכורות מעקב חכמות</strong> - אף מועמד לא נשכח, אף עסקה לא נופלת</li>
+        <li><strong>הודעות פנייה מותאמות אישית</strong> - הודעות לינקדאין שמרגישות אישיות, בקנה מידה</li>
+        <li><strong>בוט קבלת מועמדים</strong> - WhatsApp Business עם שאלון אוטומטי</li>
+        <li><strong>סורק קורות חיים AI</strong> - בוט טלגרם חינמי + מדריך שימוש מתקדם</li>
+        <li><strong>מדריך הגדרת פרטיות</strong> - 30 שניות וה-ChatGPT שלכם מאובטח</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PRICING ═══════ -->
+<section class="pricing" id="pay">
+  <div class="container">
+    <div class="pricing-card">
+      <div class="pricing-label">מחיר השקה</div>
+      <div class="pricing-amount">197<span>₪</span></div>
+      <p class="pricing-note">תשלום חד-פעמי. גישה לצמיתות. כולל עדכונים.</p>
+      <a href="https://wa.me/972544969768?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%20%F0%9F%91%8B%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A8%D7%9B%D7%95%D7%A9%20%D7%90%D7%AA%20%D7%A2%D7%A8%D7%9B%D7%AA%20AI%20%D7%9C%D7%9E%D7%92%D7%99%D7%99%D7%A1%D7%99%D7%9D%20%D7%91-197%E2%82%AA.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%91%D7%A7%D7%A9%D7%AA%20%D7%AA%D7%A9%D7%9C%D7%95%D7%9D%20%D7%91%D7%91%D7%99%D7%98" target="_blank" rel="noopener" class="pay-btn">שלם ₪197 בביט</a>
+      <div class="pay-methods">
+        <span class="pay-method">bit ביט</span>
+        <span class="pay-method">PayBox פייבוקס</span>
+        <span class="pay-method">העברה בנקאית</span>
+      </div>
+      <p class="pricing-guarantee">לא מרוצים? תוך 7 ימים מקבלים החזר מלא, בלי שאלות. אני בטוח שהכלים האלה ישנו לכם את העבודה.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ HOW IT WORKS ═══════ -->
+<section class="how-it-works">
+  <div class="container">
+    <div class="how-card">
+      <h3>איך זה עובד?</h3>
+      <ol class="how-steps">
+        <li>לוחצים על <strong>"שלם ₪197 בביט"</strong> - נפתח וואטסאפ עם הודעה מוכנה</li>
+        <li>אני שולח לכם <strong>בקשת תשלום בביט</strong> - משלמים בלחיצה</li>
+        <li>מקבלים <strong>לינק לערכה המלאה</strong> ישירות בוואטסאפ - תוך דקות</li>
+        <li>מתחילים <strong>לעבוד חכם יותר</strong> - מהיום הראשון</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ ABOUT ═══════ -->
+<section class="about">
+  <div class="container">
+    <div class="about-card">
+      <h3>גיא כהן</h3>
+      <p>יועץ AI שעוזר למגייסים לעבוד חכם יותר עם כלים שפשוט עובדים. בלי קוד, בלי מונחים מסובכים. פשוט תוצאות.</p>
+      <div class="trust-row">
+        <div class="trust-item">
+          <div class="num">+30</div>
+          <div class="lbl">עסקים שכבר עובדים אחרת</div>
+        </div>
+        <div class="trust-item">
+          <div class="num">+600</div>
+          <div class="lbl">חברי קהילה</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FAQ ═══════ -->
+<section class="faq">
+  <div class="container">
+    <h2>שאלות נפוצות</h2>
+    <div class="faq-item">
+      <div class="faq-q">צריך לשלם על ChatGPT?</div>
+      <div class="faq-a">לא. כל הפרומפטים עובדים בגרסה החינמית של ChatGPT. אפשר גם להשתמש ב-Gemini של Google (חינמי).</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">מה עם פרטיות? אני עובד עם מידע רגיש</div>
+      <div class="faq-a">בדיוק בשביל זה הערכה נקראת "AI מאובטח". הדבר הראשון שתמצאו בפנים הוא מדריך של 30 שניות לכיבוי שמירת מידע ב-ChatGPT. אחרי זה - עובדים בראש שקט.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">אני לא טכני בכלל. זה מתאים לי?</div>
+      <div class="faq-a">בדיוק בשביל זה הערכה נבנתה. כל כלי מגיע עם הוראות שלב-אחר-שלב (1-2-3) וכפתור "העתק" ללחיצה. אם אתם יודעים להעתיק-להדביק - אתם יודעים להשתמש בערכה.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">מתי אני מקבל את הערכה?</div>
+      <div class="faq-a">תוך דקות מרגע התשלום. אני שולח את הלינק ישירות בוואטסאפ.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">מה אם אני לא מרוצה?</div>
+      <div class="faq-a">החזר מלא תוך 7 ימים, בלי שאלות. שולחים הודעה ומקבלים את הכסף חזרה.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ BOTTOM CTA ═══════ -->
+<section class="bottom-cta">
+  <div class="container">
+    <a href="https://wa.me/972544969768?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%20%F0%9F%91%8B%20%D7%90%D7%A0%D7%99%20%D7%A8%D7%95%D7%A6%D7%94%20%D7%9C%D7%A8%D7%9B%D7%95%D7%A9%20%D7%90%D7%AA%20%D7%A2%D7%A8%D7%9B%D7%AA%20AI%20%D7%9C%D7%9E%D7%92%D7%99%D7%99%D7%A1%D7%99%D7%9D%20%D7%91-197%E2%82%AA.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%91%D7%A7%D7%A9%D7%AA%20%D7%AA%D7%A9%D7%9C%D7%95%D7%9D%20%D7%91%D7%91%D7%99%D7%98" target="_blank" rel="noopener" class="pay-btn">שלם ₪197 וקבל גישה מיידית</a>
+    <p style="font-size:0.85rem;color:var(--text-muted);margin-top:8px;">תשלום מאובטח בביט. לינק לערכה תוך דקות.</p>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+  <div class="container">
+    <p>&copy; 2026 גיא כהן - יועץ AI לעסקים</p>
+    <a href="https://www.linkedin.com/in/guycohen-ai/" target="_blank" rel="noopener">עקבו אחריי בלינקדאין</a>
+  </div>
+</footer>
+
+</body>
+</html>
