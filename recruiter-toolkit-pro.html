@@ -2,1351 +2,1313 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ערכת AI מאובטח למגייסים - גרסה מלאה | גיא כהן</title>
-<meta name="robots" content="noindex, nofollow">
-<meta name="description" content="10 כלים + פרומפטים מוכנים + הוראות שלב-אחר-שלב. הגרסה המלאה של ערכת AI מאובטח למגייסים.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --navy-deep: #f5f7fb;
-  --navy: #edf0f7;
-  --navy-light: #e4e8f2;
-  --navy-mid: #dce1ed;
+  --navy: #1a2332;
+  --navy-light: #2d3a4d;
   --gold: #d4860a;
   --gold-light: #f5a623;
-  --gold-dim: rgba(212, 134, 10, 0.1);
-  --text-primary: #1a2332;
-  --text-secondary: #4a5568;
-  --text-muted: #8896a7;
   --blue: #2563eb;
-  --blue-bg: rgba(37, 99, 235, 0.06);
-  --blue-border: rgba(37, 99, 235, 0.18);
   --green: #059669;
-  --green-bg: rgba(5, 150, 105, 0.06);
-  --green-border: rgba(5, 150, 105, 0.18);
   --purple: #7c3aed;
-  --purple-bg: rgba(124, 58, 237, 0.06);
-  --purple-border: rgba(124, 58, 237, 0.18);
   --coral: #e11d48;
-  --coral-bg: rgba(225, 29, 72, 0.06);
-  --coral-border: rgba(225, 29, 72, 0.18);
-  --glass: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(0, 0, 0, 0.08);
-  --radius: 16px;
-  --radius-sm: 10px;
-}
-
-html {
-  scroll-behavior: smooth;
+  --bg: #f8f9fc;
+  --text: #1a2332;
+  --sub: #4a5568;
+  --muted: #8896a7;
 }
 
 body {
   font-family: 'Heebo', sans-serif;
-  background: var(--navy-deep);
-  color: var(--text-primary);
+  background: #fff;
+  color: var(--text);
   line-height: 1.7;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.015'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 0;
-}
-
-.glow-orb {
-  position: fixed;
-  border-radius: 50%;
-  filter: blur(120px);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.glow-1 {
-  width: 600px;
-  height: 600px;
-  background: rgba(37, 99, 235, 0.04);
-  top: -200px;
-  right: -200px;
-}
-
-.glow-2 {
-  width: 500px;
-  height: 500px;
-  background: rgba(212, 134, 10, 0.04);
-  bottom: 20%;
-  left: -150px;
-}
-
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 24px;
-  position: relative;
-  z-index: 1;
-}
-
-section {
-  padding: 80px 0;
-}
-
-/* ═══════ PREMIUM BADGE ═══════ */
-.premium-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: linear-gradient(135deg, rgba(212, 134, 10, 0.15), rgba(245, 166, 35, 0.1));
-  border: 1px solid rgba(245, 166, 35, 0.4);
-  border-radius: 100px;
-  padding: 4px 14px;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--gold);
-  letter-spacing: 0.5px;
-}
-
-.verified-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  background: var(--green-bg);
-  border: 1px solid var(--green-border);
-  border-radius: 100px;
-  padding: 4px 12px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--green);
-}
-
-/* ═══════ HERO ═══════ */
-.hero {
-  min-height: 60vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 100px 0 60px;
-  position: relative;
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 200px;
-  background: linear-gradient(to top, var(--navy-deep), transparent);
-  z-index: 0;
-}
-
-.hero-top-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: linear-gradient(135deg, rgba(212, 134, 10, 0.12), rgba(245, 166, 35, 0.08));
-  border: 1px solid rgba(245, 166, 35, 0.35);
-  border-radius: 100px;
-  padding: 10px 24px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--gold);
-  margin-bottom: 32px;
-  animation: fadeInDown 0.8s ease both;
-}
-
-.hero h1 {
-  font-size: clamp(2rem, 5vw, 3.4rem);
-  font-weight: 800;
-  line-height: 1.2;
-  margin-bottom: 24px;
-  background: linear-gradient(135deg, var(--text-primary) 0%, var(--gold) 50%, var(--text-primary) 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: fadeInDown 0.8s ease 0.15s both, shimmer 6s ease-in-out infinite;
-}
-
-@keyframes shimmer {
-  0%, 100% { background-position: 200% center; }
-  50% { background-position: 0% center; }
-}
-
-.hero-sub {
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  color: var(--text-secondary);
-  max-width: 650px;
-  margin: 0 auto 0;
-  font-weight: 300;
-  animation: fadeInDown 0.8s ease 0.3s both;
-}
-
-@keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ═══════ PRIVACY SECTION ═══════ */
-.privacy-section {
-  padding: 40px 0 60px;
-}
-
-.privacy-card {
-  background: linear-gradient(135deg, rgba(5, 150, 105, 0.04), rgba(5, 150, 105, 0.02));
-  border: 1.5px solid var(--green-border);
-  border-radius: var(--radius);
-  padding: 40px 36px;
-  max-width: 800px;
-  margin: 0 auto;
-  position: relative;
-  overflow: hidden;
-}
-
-.privacy-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, var(--green), transparent);
-}
-
-.privacy-header {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 20px;
-}
-
-.privacy-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  background: var(--green-bg);
-  border: 1px solid var(--green-border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.4rem;
-  flex-shrink: 0;
-}
-
-.privacy-header h2 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--green);
-}
-
-.privacy-header .time-badge {
-  background: var(--green-bg);
-  border: 1px solid var(--green-border);
-  border-radius: 100px;
-  padding: 4px 12px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--green);
-  margin-right: auto;
-}
-
-.privacy-steps {
-  list-style: none;
-  counter-reset: privacy-step;
-}
-
-.privacy-steps li {
-  counter-increment: privacy-step;
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  margin-bottom: 14px;
-  font-size: 1rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-.privacy-steps li::before {
-  content: counter(privacy-step);
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--green-bg);
-  border: 1px solid var(--green-border);
-  color: var(--green);
-  font-weight: 700;
-  font-size: 0.85rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.privacy-steps li strong {
-  color: var(--text-primary);
-}
-
-.privacy-note {
-  margin-top: 16px;
-  padding: 12px 16px;
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: var(--radius-sm);
-  font-size: 0.88rem;
-  color: var(--text-muted);
-  border: 1px solid var(--glass-border);
-}
-
-/* ═══════ TOOLS SECTION ═══════ */
-.tools {
-  padding-top: 40px;
-}
-
-.section-label {
   font-size: 13px;
+}
+
+/* ── PAGE BREAK ── */
+.page { page-break-after: always; padding: 0; }
+.page:last-child { page-break-after: avoid; }
+
+/* ── COVER ── */
+.cover {
+  background: linear-gradient(145deg, var(--navy) 0%, var(--navy-light) 100%);
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px 40px;
+}
+.cover .badge {
+  background: rgba(245,166,35,0.15);
+  border: 1px solid rgba(245,166,35,0.4);
+  color: var(--gold-light);
+  padding: 6px 20px;
+  border-radius: 100px;
+  font-size: 12px;
   font-weight: 600;
-  color: var(--gold);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-align: center;
-  margin-bottom: 12px;
+  margin-bottom: 32px;
+  letter-spacing: 1px;
 }
-
-.section-title {
-  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 56px;
-}
-
-.category {
-  margin-bottom: 64px;
-}
-
-.category-header {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 28px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--glass-border);
-}
-
-.category-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.3rem;
-  flex-shrink: 0;
-}
-
-.cat-blue .category-icon { background: var(--blue-bg); border: 1px solid var(--blue-border); }
-.cat-green .category-icon { background: var(--green-bg); border: 1px solid var(--green-border); }
-.cat-purple .category-icon { background: var(--purple-bg); border: 1px solid var(--purple-border); }
-.cat-coral .category-icon { background: var(--coral-bg); border: 1px solid var(--coral-border); }
-
-.category-header h3 {
-  font-size: 1.25rem;
-  font-weight: 700;
-}
-
-.cat-blue .category-header h3 { color: var(--blue); }
-.cat-green .category-header h3 { color: var(--green); }
-.cat-purple .category-header h3 { color: var(--purple); }
-.cat-coral .category-header h3 { color: var(--coral); }
-
-/* ═══════ TOOL CARD (PREMIUM) ═══════ */
-.tool-card {
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius);
-  padding: 32px 28px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  margin-bottom: 24px;
-  transition: all 0.35s ease;
-}
-
-.tool-card:hover {
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
-}
-
-.cat-blue .tool-card:hover { border-color: var(--blue-border); }
-.cat-green .tool-card:hover { border-color: var(--green-border); }
-.cat-purple .tool-card:hover { border-color: var(--purple-border); }
-.cat-coral .tool-card:hover { border-color: var(--coral-border); }
-
-.tool-top {
-  display: flex;
-  align-items: center;
-  gap: 14px;
+.cover h1 {
+  font-size: 42px;
+  font-weight: 900;
+  line-height: 1.2;
   margin-bottom: 16px;
-  flex-wrap: wrap;
 }
-
-.tool-num {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.85rem;
-  font-weight: 800;
-  flex-shrink: 0;
+.cover h1 span { color: var(--gold-light); }
+.cover p {
+  font-size: 16px;
+  color: rgba(255,255,255,0.7);
+  max-width: 480px;
+  margin: 0 auto 40px;
 }
-
-.cat-blue .tool-num { background: var(--blue-bg); color: var(--blue); border: 1px solid var(--blue-border); }
-.cat-green .tool-num { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
-.cat-purple .tool-num { background: var(--purple-bg); color: var(--purple); border: 1px solid var(--purple-border); }
-.cat-coral .tool-num { background: var(--coral-bg); color: var(--coral); border: 1px solid var(--coral-border); }
-
-.tool-top h4 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  flex: 1;
+.cover .divider {
+  width: 60px;
+  height: 3px;
+  background: var(--gold);
+  margin: 0 auto 40px;
 }
-
-.tool-badges {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.tool-name-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.88rem;
-  font-weight: 500;
-  color: var(--blue);
-  text-decoration: none;
-  margin-bottom: 12px;
-  transition: color 0.2s;
-}
-
-.tool-name-link:hover {
-  color: var(--gold);
-}
-
-.tool-description {
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  margin-bottom: 20px;
-}
-
-/* ═══════ STEPS ═══════ */
-.tool-steps {
-  list-style: none;
-  counter-reset: tool-step;
-  margin-bottom: 20px;
-}
-
-.tool-steps li {
-  counter-increment: tool-step;
-  display: flex;
-  align-items: flex-start;
+.cover .tools-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   gap: 12px;
-  margin-bottom: 10px;
-  font-size: 0.92rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
+  max-width: 560px;
+  margin: 0 auto 48px;
+}
+.cover .tool-chip {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 10px 6px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.8);
+  text-align: center;
+}
+.cover .tool-chip .num {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--gold-light);
+  display: block;
+}
+.cover .author {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  margin-top: 8px;
 }
 
-.tool-steps li::before {
-  content: counter(tool-step);
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: var(--navy-light);
-  color: var(--text-primary);
+/* ── TOC ── */
+.toc-page {
+  padding: 60px 50px;
+  background: var(--bg);
+  min-height: 100vh;
+}
+.toc-page h2 {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.toc-page .toc-sub {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 40px;
+}
+.toc-section { margin-bottom: 32px; }
+.toc-cat {
+  font-size: 11px;
   font-weight: 700;
-  font-size: 0.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  margin-top: 2px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e2e8f0;
 }
-
-.tool-steps li strong {
-  color: var(--text-primary);
-}
-
-/* ═══════ PROMPT BOX ═══════ */
-.prompt-box {
-  background: linear-gradient(135deg, #1a2332, #243044);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius-sm);
-  padding: 0;
-  position: relative;
-  overflow: hidden;
-}
-
-.prompt-header {
+.toc-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 18px;
-  background: rgba(255, 255, 255, 0.05);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 10px 0;
+  border-bottom: 1px dotted #e2e8f0;
 }
-
-.prompt-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.5);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-.copy-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+.toc-item:last-child { border-bottom: none; }
+.toc-item-left { display: flex; align-items: center; gap: 12px; }
+.toc-num {
+  width: 28px;
+  height: 28px;
   border-radius: 8px;
-  padding: 6px 14px;
-  font-family: 'Heebo', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.8);
-  cursor: pointer;
-  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.blue-num { background: rgba(37,99,235,0.1); color: var(--blue); }
+.green-num { background: rgba(5,150,105,0.1); color: var(--green); }
+.purple-num { background: rgba(124,58,237,0.1); color: var(--purple); }
+.coral-num { background: rgba(225,29,72,0.1); color: var(--coral); }
+.toc-name { font-weight: 600; font-size: 13px; }
+.toc-desc { font-size: 11px; color: var(--muted); }
+.toc-save {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--green);
+  white-space: nowrap;
 }
 
-.copy-btn:hover {
-  background: rgba(255, 255, 255, 0.18);
-  color: #fff;
+/* ── SETUP PAGE ── */
+.setup-page {
+  padding: 50px;
+  min-height: 100vh;
 }
-
-.copy-btn.copied {
-  background: var(--green);
-  border-color: var(--green);
-  color: #fff;
+.setup-page h2 {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 6px;
 }
-
-.prompt-text {
-  padding: 18px 20px;
-  font-family: 'Heebo', sans-serif;
-  font-size: 0.9rem;
-  line-height: 1.8;
-  color: rgba(255, 255, 255, 0.85);
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  direction: rtl;
-  margin: 0;
+.setup-page .setup-sub {
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 32px;
 }
-
-.prompt-text .placeholder {
-  color: var(--gold-light);
-  font-weight: 500;
-}
-
-/* ═══════ TIP BOX ═══════ */
-.tip-box {
-  background: var(--gold-dim);
-  border: 1px solid rgba(245, 166, 35, 0.2);
-  border-radius: var(--radius-sm);
-  padding: 14px 18px;
-  margin-top: 16px;
-  font-size: 0.88rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-.tip-box strong {
-  color: var(--gold);
-}
-
-/* ═══════ ALT TOOL NOTE ═══════ */
-.alt-note {
-  margin-top: 12px;
-  padding: 10px 14px;
-  background: rgba(124, 58, 237, 0.04);
-  border: 1px solid rgba(124, 58, 237, 0.12);
-  border-radius: var(--radius-sm);
-  font-size: 0.82rem;
-  color: var(--text-muted);
-}
-
-/* ═══════ TEMPLATE BOX ═══════ */
-.template-box {
-  background: var(--glass);
-  border: 2px dashed var(--green-border);
-  border-radius: var(--radius-sm);
-  padding: 24px;
-  text-align: center;
-  margin-top: 16px;
-}
-
-.template-box h5 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.template-box p {
-  font-size: 0.88rem;
-  color: var(--text-muted);
+.setup-box {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px 24px;
   margin-bottom: 16px;
 }
-
-.template-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: linear-gradient(135deg, var(--green), #047857);
+.setup-box h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+.setup-step {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 8px;
+  align-items: flex-start;
+}
+.step-num {
+  background: var(--navy);
   color: #fff;
-  font-family: 'Heebo', sans-serif;
-  font-size: 0.95rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.setup-step p { font-size: 12px; color: var(--sub); line-height: 1.6; }
+.setup-step a { color: var(--blue); text-decoration: none; font-weight: 600; }
+.limit-note {
+  background: #fef9e7;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 11px;
+  color: #b45309;
+  margin-top: 10px;
+}
+
+/* ── TOOL PAGE ── */
+.tool-page {
+  padding: 50px;
+  min-height: 100vh;
+}
+.tool-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e2e8f0;
+}
+.tool-badge {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.blue-badge { background: rgba(37,99,235,0.1); }
+.green-badge { background: rgba(5,150,105,0.1); }
+.purple-badge { background: rgba(124,58,237,0.1); }
+.coral-badge { background: rgba(225,29,72,0.1); }
+
+.tool-title-block h2 {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+.tool-title-block .cat-tag {
+  font-size: 11px;
   font-weight: 600;
-  padding: 12px 28px;
-  border-radius: 100px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 16px rgba(5, 150, 105, 0.25);
+  color: var(--muted);
+  letter-spacing: 0.5px;
 }
-
-.template-link:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(5, 150, 105, 0.35);
+.tool-meta {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
 }
-
-/* ═══════ WHATSAPP MESSAGE BOX ═══════ */
-.wa-message {
-  background: #e7f6e7;
-  border: 1px solid #b7deb7;
-  border-radius: 12px 12px 12px 0;
-  padding: 16px 20px;
-  margin-top: 16px;
-  font-size: 0.92rem;
-  line-height: 1.8;
-  color: #1a3a1a;
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--sub);
+}
+.meta-item strong { color: var(--navy); }
+.section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+  margin-top: 18px;
+}
+.prompt-box {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 20px 18px 16px;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  line-height: 1.75;
+  color: #e2e8f0;
+  white-space: pre-wrap;
   position: relative;
+  margin-top: 6px;
 }
-
-.wa-label {
+.prompt-box::before {
+  content: '📋 העתק ל-Gemini';
   position: absolute;
   top: -10px;
   right: 12px;
-  background: #25d366;
-  color: #fff;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 2px 10px;
-  border-radius: 100px;
-}
-
-/* ═══════ CTA SECTION ═══════ */
-.cta-section {
-  background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 50%, var(--navy-deep) 100%);
-  padding: 80px 0;
-}
-
-.cta-card {
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius);
-  padding: 48px 40px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  max-width: 700px;
-  margin: 0 auto;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.cta-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
-}
-
-.cta-card h3 {
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin-bottom: 12px;
-}
-
-.cta-card p {
-  font-size: 1.05rem;
-  color: var(--text-secondary);
-  line-height: 1.8;
-  margin-bottom: 28px;
-}
-
-.cta-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: linear-gradient(135deg, #25d366, #128c7e);
+  background: var(--gold);
   color: #fff;
   font-family: 'Heebo', sans-serif;
-  font-size: 1.1rem;
+  font-size: 10px;
   font-weight: 700;
-  padding: 16px 36px;
-  border: none;
-  border-radius: 100px;
+  padding: 2px 10px;
+  border-radius: 6px;
+}
+/* Collapsible prompt toggle */
+.prompt-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #1e293b;
+  color: #e2e8f0;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-family: 'Heebo', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
   cursor: pointer;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+  width: 100%;
+  margin-top: 6px;
+  transition: background 0.2s;
 }
-
-.cta-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(37, 211, 102, 0.4);
+.prompt-toggle:hover { background: #273344; }
+.prompt-toggle .arrow {
+  transition: transform 0.2s;
+  font-size: 10px;
 }
-
-/* ═══════ FOOTER ═══════ */
-footer {
-  padding: 32px 0;
-  text-align: center;
-  border-top: 1px solid var(--glass-border);
+.prompt-toggle.open .arrow { transform: rotate(90deg); }
+.prompt-collapse {
+  display: none;
+  margin-top: 0;
 }
-
-footer p {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin-bottom: 8px;
+.prompt-collapse.open {
+  display: block;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
 }
-
-footer a {
-  font-size: 0.85rem;
-  color: var(--gold);
-  text-decoration: none;
-  transition: color 0.2s ease;
+.prompt-collapse .prompt-box {
+  border-radius: 0 0 10px 10px;
+  border-top: 1px dashed #334155;
+  margin-top: 0;
 }
-
-footer a:hover {
+.copy-hint {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  font-size: 10px;
+  color: #64748b;
+  font-family: 'Heebo', sans-serif;
+}
+.example-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 12px;
+  color: var(--sub);
+}
+.example-box strong {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.tip-box {
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 12px;
+  color: #166534;
+}
+.tip-box::before { content: "💡 "; font-size: 13px; }
+.link-box {
+  background: var(--navy);
+  border-radius: 10px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.link-box span { color: rgba(255,255,255,0.7); font-size: 12px; }
+.link-box a {
   color: var(--gold-light);
+  font-weight: 700;
+  font-size: 13px;
+  text-decoration: none;
 }
 
-/* ═══════ SCROLL ANIMATIONS ═══════ */
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.7s ease;
+/* ── SHEETS PAGE ── */
+.sheets-page {
+  padding: 50px;
+}
+.sheets-steps { margin-top: 16px; }
+.sheet-step {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 16px;
+  align-items: flex-start;
+}
+.sheet-step-num {
+  background: var(--green);
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.sheet-step-content h4 { font-size: 13px; font-weight: 700; margin-bottom: 3px; }
+.sheet-step-content p { font-size: 12px; color: var(--sub); }
+.sheet-step-content code {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-family: monospace;
+  font-size: 11px;
+  color: #334155;
+}
+.columns-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+.col-item {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 11px;
+}
+.col-item .col-letter {
+  font-weight: 800;
+  color: var(--blue);
+  margin-left: 4px;
 }
 
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
+/* ── FINAL PAGE ── */
+.final-page {
+  background: linear-gradient(145deg, var(--navy) 0%, var(--navy-light) 100%);
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px 40px;
 }
-
-/* ═══════ RESPONSIVE ═══════ */
-@media (max-width: 768px) {
-  section {
-    padding: 60px 0;
-  }
-
-  .hero {
-    min-height: auto;
-    padding: 80px 0 40px;
-  }
-
-  .tool-card {
-    padding: 24px 20px;
-  }
-
-  .privacy-card {
-    padding: 28px 20px;
-  }
-
-  .tool-top {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .prompt-text {
-    font-size: 0.85rem;
-    padding: 14px 16px;
-  }
-
-  .cta-card {
-    padding: 32px 24px;
-  }
-
-  .privacy-header {
-    flex-wrap: wrap;
-  }
+.final-page h2 { font-size: 32px; font-weight: 800; margin-bottom: 12px; }
+.final-page p { color: rgba(255,255,255,0.7); font-size: 15px; max-width: 400px; margin: 0 auto 32px; }
+.final-page .wa-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--gold), #b8720a);
+  color: #fff;
+  padding: 14px 36px;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  margin-bottom: 32px;
 }
+.final-page .links { display: flex; gap: 24px; justify-content: center; margin-top: 24px; }
+.final-page .links a { color: rgba(255,255,255,0.5); font-size: 12px; text-decoration: none; }
 
-@media (max-width: 400px) {
-  .container {
-    padding: 0 16px;
-  }
-
-  .hero h1 {
-    font-size: 1.7rem;
-  }
-
-  .tool-badges {
-    flex-direction: column;
-  }
+@media print {
+  body { font-size: 12px; }
+  .page { page-break-after: always; }
 }
 </style>
 </head>
 <body>
 
-<!-- Ambient glows -->
-<div class="glow-orb glow-1"></div>
-<div class="glow-orb glow-2"></div>
+<!-- ═══ COVER ═══ -->
+<div class="page">
+<div class="cover">
+  <div class="badge">ערכה מקצועית · גיא כהן AI</div>
+  <h1>10 כלים AI<br><span>למגייסים חכמים</span></h1>
+  <div class="divider"></div>
+  <p>מצא מועמדים מהר יותר, חסוך שעות ניירת, ושמור על קשר עם כל ליד — בלי ידע טכני</p>
 
-<!-- ═══════ HERO ═══════ -->
-<section class="hero">
-  <div class="container">
-    <div class="hero-top-badge">PREMIUM - גרסה מלאה</div>
-    <h1>ערכת AI מאובטח למגייסים</h1>
-    <p class="hero-sub">10 כלים מוכנים לשימוש + פרומפטים שאפשר להעתיק + הוראות שלב-אחר-שלב.<br>הכל נבדק. הכל בטוח. הכל בעברית.</p>
+  <div class="tools-grid">
+    <div class="tool-chip"><span class="num">01</span>חיפוש חכם</div>
+    <div class="tool-chip"><span class="num">02</span>התאמה</div>
+    <div class="tool-chip"><span class="num">03</span>רדומים</div>
+    <div class="tool-chip"><span class="num">04</span>סיכום ראיון</div>
+    <div class="tool-chip"><span class="num">05</span>פרופיל</div>
+    <div class="tool-chip"><span class="num">06</span>מעקב</div>
+    <div class="tool-chip"><span class="num">07</span>תזכורות</div>
+    <div class="tool-chip"><span class="num">08</span>פנייה</div>
+    <div class="tool-chip"><span class="num">09</span>קבלה</div>
+    <div class="tool-chip"><span class="num">10</span>סורק AI</div>
   </div>
-</section>
 
-<!-- ═══════ PRIVACY SETUP ═══════ -->
-<section class="privacy-section">
-  <div class="container">
-    <div class="privacy-card reveal">
-      <div class="privacy-header">
-        <div class="privacy-icon">🛡️</div>
-        <h2>הגדרת פרטיות - חובה לפני התחלה</h2>
-        <span class="time-badge">30 שניות</span>
+  <div class="author">מאת גיא כהן · יועץ AI לעסקים · 2026</div>
+</div>
+</div>
+
+<!-- ═══ TOC ═══ -->
+<div class="page">
+<div class="toc-page">
+  <h2>תוכן העניינים</h2>
+  <p class="toc-sub">10 כלים מחולקים ל-4 קטגוריות · פרומפטים + Gems + תבניות מוכנות</p>
+
+  <div class="toc-section">
+    <div class="toc-cat">🔍 קטגוריה 1 — שליפה אקטיבית</div>
+    <div class="toc-item">
+      <div class="toc-item-left">
+        <div class="toc-num blue-num">01</div>
+        <div><div class="toc-name">מנוע חיפוש מועמדים</div><div class="toc-desc">שאילתות AI על מאגר Excel/CSV</div></div>
       </div>
-      <p style="color:var(--text-secondary);margin-bottom:18px;font-size:0.95rem;">ChatGPT מאמן על מידע כברירת מחדל. <strong style="color:var(--text-primary)">בשלושה קליקים מכבים את זה.</strong> ככה תעבדו בראש שקט:</p>
-      <ol class="privacy-steps">
-        <li>היכנסו ל-<strong>ChatGPT</strong> (chat.openai.com) ולחצו על <strong>גלגל השיניים</strong> (Settings) בתפריט הצד</li>
-        <li>בחרו <strong>Data controls</strong></li>
-        <li>כבו את <strong>"Improve the model for everyone"</strong> - העבירו ל-<strong>OFF</strong></li>
-      </ol>
-      <div class="privacy-note">מעכשיו ChatGPT לא שומר ולא מאמן על שום מידע שתעלו. קורות חיים, שמות, טלפונים - הכל נשאר פרטי.</div>
+      <div class="toc-save">חוסך 2–3 שעות</div>
+    </div>
+    <div class="toc-item">
+      <div class="toc-item-left">
+        <div class="toc-num blue-num">02</div>
+        <div><div class="toc-name">התאמה אוטומטית משרה–מועמד</div><div class="toc-desc">ציון 0–100 לכל מועמד מול משרה</div></div>
+      </div>
+      <div class="toc-save">חוסך שעה</div>
+    </div>
+    <div class="toc-item">
+      <div class="toc-item-left">
+        <div class="toc-num blue-num">03</div>
+        <div><div class="toc-name">העלאת מועמדים רדומים</div><div class="toc-desc">מי לא התאים אז ומתאים היום</div></div>
+      </div>
+      <div class="toc-save">מועמדים אבודים</div>
     </div>
   </div>
-</section>
 
-<!-- ═══════ 10 TOOLS ═══════ -->
-<section class="tools">
-  <div class="container">
-    <div class="section-label reveal">10 הכלים</div>
-    <h2 class="section-title reveal">הכל מוכן - פשוט העתיקו והתחילו</h2>
-
-    <!-- ═══════ CATEGORY 1: BLUE - שליפה אקטיבית ═══════ -->
-    <div class="category cat-blue reveal">
-      <div class="category-header">
-        <div class="category-icon">🔍</div>
-        <h3>שליפה אקטיבית - מציאת אנשים</h3>
+  <div class="toc-section">
+    <div class="toc-cat">⚡ קטגוריה 2 — חיסול ניירת</div>
+    <div class="toc-item">
+      <div class="toc-item-left">
+        <div class="toc-num green-num">04</div>
+        <div><div class="toc-name">סיכום ראיון בלחיצה</div><div class="toc-desc">הקלטה → NotebookLM → סיכום מובנה</div></div>
       </div>
-
-      <!-- Tool 01 -->
-      <div class="tool-card">
-        <div class="tool-top">
-          <div class="tool-num">01</div>
-          <h4>חיפוש מועמדים חכם</h4>
-          <div class="tool-badges">
-            <span class="premium-badge">PREMIUM</span>
-            <span class="verified-badge">נבדק ✓</span>
-          </div>
-        </div>
-        <a href="https://chat.openai.com" target="_blank" rel="noopener" class="tool-name-link">🔗 ChatGPT - chat.openai.com</a>
-        <p class="tool-description">העלו את מאגר המועמדים שלכם (אקסל/CSV) וקבלו רשימה מדורגת של מועמדים מתאימים תוך שניות. במקום לגלול ידנית באלפי שורות.</p>
-        <ol class="tool-steps">
-          <li>היכנסו ל-ChatGPT ולחצו על <strong>אייקון המהדק (Attach)</strong> להעלאת קובץ</li>
-          <li>העלו את <strong>קובץ המאגר</strong> שלכם (אקסל, CSV, או Google Sheets שהורדתם)</li>
-          <li><strong>העתיקו את הפרומפט</strong> למטה ומלאו את הפרטים במקומות המסומנים</li>
-        </ol>
-        <div class="prompt-box">
-          <div class="prompt-header">
-            <span class="prompt-label">פרומפט מוכן</span>
-            <button class="copy-btn" data-prompt="tool01">📋 העתק</button>
-          </div>
-          <pre class="prompt-text" id="prompt-tool01">הנה מאגר המועמדים שלי (הקובץ שהעליתי).
-
-אני מחפש/ת מועמדים שמתאימים לדרישות הבאות:
-- תפקיד: <span class="placeholder">[לדוגמה: מפתח Full Stack]</span>
-- ניסיון מינימלי: <span class="placeholder">[לדוגמה: 3 שנים]</span>
-- טכנולוגיות נדרשות: <span class="placeholder">[לדוגמה: React, Node.js]</span>
-- מיקום: <span class="placeholder">[לדוגמה: מרכז הארץ]</span>
-
-סדר את התוצאות לפי רלוונטיות מהגבוה לנמוך.
-לכל מועמד הצג: שם מלא, טלפון, ניסיון רלוונטי, וסיבה קצרה למה הוא מתאים.</pre>
-        </div>
-        <div class="alt-note">💡 עובד גם ב-Gemini (gemini.google.com) - העלו קובץ ושלחו את אותו פרומפט</div>
-      </div>
-
-      <!-- Tool 02 -->
-      <div class="tool-card">
-        <div class="tool-top">
-          <div class="tool-num">02</div>
-          <h4>התאמה אוטומטית משרה-מועמד</h4>
-          <div class="tool-badges">
-            <span class="premium-badge">PREMIUM</span>
-            <span class="verified-badge">נבדק ✓</span>
-          </div>
-        </div>
-        <a href="https://chat.openai.com" target="_blank" rel="noopener" class="tool-name-link">🔗 ChatGPT - chat.openai.com</a>
-        <p class="tool-description">מזינים תיאור משרה + מאגר מועמדים, ומקבלים טבלת דירוג 0-100 עם הסבר לכל ציון. תוך דקות במקום שעות.</p>
-        <ol class="tool-steps">
-          <li>העלו את <strong>קובץ המאגר</strong> ל-ChatGPT</li>
-          <li><strong>העתיקו את הפרומפט</strong> והדביקו את תיאור המשרה במקום המסומן</li>
-          <li>קבלו <strong>טבלת דירוג צבעונית</strong> - ירוק (מעל 70), כתום (50-70), אדום (מתחת ל-50)</li>
-        </ol>
-        <div class="prompt-box">
-          <div class="prompt-header">
-            <span class="prompt-label">פרומפט מוכן</span>
-            <button class="copy-btn" data-prompt="tool02">📋 העתק</button>
-          </div>
-          <pre class="prompt-text" id="prompt-tool02">הנה תיאור המשרה:
----
-<span class="placeholder">[הדביקו כאן את תיאור המשרה המלא]</span>
----
-
-הנה מאגר המועמדים שלי (הקובץ שהעליתי).
-
-בצע התאמה של כל מועמד למשרה הזו:
-1. דרג כל מועמד 0-100
-2. הסבר בשורה אחת למה הציון הזה
-3. סדר בטבלה מהגבוה לנמוך
-4. סמן בירוק מועמדים מעל 70, בכתום 50-70, באדום מתחת ל-50</pre>
-        </div>
-        <div class="alt-note">💡 עובד גם ב-Gemini (gemini.google.com) - העלו קובץ ושלחו את אותו פרומפט</div>
-      </div>
-
-      <!-- Tool 03 -->
-      <div class="tool-card">
-        <div class="tool-top">
-          <div class="tool-num">03</div>
-          <h4>העלאת מועמדים רדומים</h4>
-          <div class="tool-badges">
-            <span class="premium-badge">PREMIUM</span>
-            <span class="verified-badge">נבדק ✓</span>
-          </div>
-        </div>
-        <a href="https://chat.openai.com" target="_blank" rel="noopener" class="tool-name-link">🔗 ChatGPT - chat.openai.com</a>
-        <p class="tool-description">מועמדים שלא התאימו בעבר יכולים להיות מושלמים היום. הכלי סורק את המאגר ומוצא הזדמנויות שפספסתם.</p>
-        <ol class="tool-steps">
-          <li>העלו את <strong>קובץ המאגר</strong> ל-ChatGPT</li>
-          <li><strong>רשמו את המשרות הפתוחות</strong> שלכם כרגע</li>
-          <li>קבלו רשימת מועמדים שפעם לא התאימו - <strong>אבל היום כן</strong></li>
-        </ol>
-        <div class="prompt-box">
-          <div class="prompt-header">
-            <span class="prompt-label">פרומפט מוכן</span>
-            <button class="copy-btn" data-prompt="tool03">📋 העתק</button>
-          </div>
-          <pre class="prompt-text" id="prompt-tool03">הנה מאגר המועמדים שלי (הקובץ שהעליתי).
-
-הנה המשרות הפתוחות שלי כרגע:
-1. <span class="placeholder">[משרה 1 + דרישות עיקריות]</span>
-2. <span class="placeholder">[משרה 2 + דרישות עיקריות]</span>
-3. <span class="placeholder">[משרה 3 + דרישות עיקריות]</span>
-
-חפש מועמדים "רדומים" - כאלה שלא התאימו למשרות בעבר, אבל היום כן מתאימים. הסיבות יכולות להיות:
-- צברו ניסיון נוסף מאז הפעם האחרונה
-- שינוי כיוון קריירה
-- המשרה החדשה דורשת משהו שונה
-
-לכל מועמד רדום, הסבר: למה לא התאים אז, ולמה כן מתאים עכשיו.</pre>
-        </div>
-        <div class="tip-box"><strong>טיפ:</strong> הריצו את הכלי הזה פעם בשבוע - כל פעם שנפתחת משרה חדשה. תופתעו כמה הזדמנויות מתגלות.</div>
-      </div>
+      <div class="toc-save">חוסך 20 דקות</div>
     </div>
-
-    <!-- ═══════ CATEGORY 2: GREEN - חיסול ניירת ═══════ -->
-    <div class="category cat-green reveal">
-      <div class="category-header">
-        <div class="category-icon">⚡</div>
-        <h3>חיסול הניירת - אוטומציה</h3>
+    <div class="toc-item">
+      <div class="toc-item-left">
+        <div class="toc-num green-num">05</div>
+        <div><div class="toc-name">פרופיל מועמד ללקוח</div><div class="toc-desc">קו"ח → pitch מקצועי</div></div>
       </div>
-
-      <!-- Tool 04 -->
-      <div class="tool-card">
-        <div class="tool-top">
-          <div class="tool-num">04</div>
-          <h4>סיכום ראיון בלחיצה</h4>
-          <div class="tool-badges">
-            <span class="premium-badge">PREMIUM</span>
-            <span class="verified-badge">נבדק ✓</span>
-          </div>
-        </div>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
-          <a href="https://timeless.day" target="_blank" rel="noopener" class="tool-name-link">🔗 Timeless.day - תמלול</a>
-          <a href="https://chat.openai.com" target="_blank" rel="noopener" class="tool-name-link">🔗 ChatGPT - סיכום</a>
-        </div>
-        <p class="tool-description">מקליטים את הראיון, מקבלים תמלול אוטומטי, ואז ChatGPT מסכם הכל בפורמט מובנה. במקום לכתוב סיכומים ידנית.</p>
-        <ol class="tool-steps">
-          <li>היכנסו ל-<strong>timeless.day</strong> והקליטו את הראיון (או העלו קובץ אודיו)</li>
-          <li>העתיקו את <strong>התמלול</strong> שמתקבל</li>
-          <li>הדביקו את התמלול ב-ChatGPT <strong>עם הפרומפט הבא</strong></li>
-        </ol>
-        <div class="prompt-box">
-          <div class="prompt-header">
-            <span class="prompt-label">פרומפט מוכן</span>
-            <button class="copy-btn" data-prompt="tool04">📋 העתק</button>
-          </div>
-          <pre class="prompt-text" id="prompt-tool04">הנה תמלול של ראיון עבודה:
----
-<span class="placeholder">[הדביקו את התמלול מ-Timeless]</span>
----
-
-כתוב סיכום מובנה של הראיון בפורמט הבא:
-- שם המועמד:
-- תפקיד שאליו התמודד:
-- חוזקות עיקריות (3 נקודות):
-- חולשות / נקודות לבדיקה (2-3 נקודות):
-- ציפיות שכר:
-- זמינות:
-- התרשמות כללית:
-- המלצה: כן / לא / אולי (עם הסבר בשורה אחת)
-
-מקסימום 8 שורות. תמציתי ועניייני.</pre>
-        </div>
-        <div class="tip-box"><strong>אלטרנטיבה חינמית לתמלול:</strong> אפשר גם להשתמש ב-Fireflies.ai (גרסה חינמית) או להקליט עם הטלפון ולהעלות את הקובץ ישירות ל-ChatGPT.</div>
+      <div class="toc-save">חוסך 30 דקות</div>
+    </div>
+    <div class="toc-item">
+      <div class="toc-item-left">
+        <div class="toc-num green-num">06</div>
+        <div><div class="toc-name">לוח מעקב Pipeline</div><div class="toc-desc">Google Sheets עם נוסחאות + צבעים</div></div>
       </div>
-
-      <!-- Tool 05 -->
-      <div class="tool-card">
-        <div class="tool-top">
-          <div class="tool-num">05</div>
-          <h4>כתיבת פרופיל מועמד ללקוח</h4>
-          <div class="tool-badges">
-            <span class="premium-badge">PREMIUM</span>
-            <span class="verified-badge">נבדק ✓</span>
-          </div>
-        </div>
-        <a href="https://chat.openai.com" target="_blank" rel="noopener" class="tool-name-link">🔗 ChatGPT - chat.openai.com</a>
-        <p class="tool-description">יוצרים דוח מועמד מקצועי לשליחה למעסיק בלחיצה. הדוח נראה כאילו השקעתם שעה - אבל לקח 30 שניות.</p>
-        <ol class="tool-steps">
-          <li>הכינו את <strong>קורות החיים</strong> של המועמד ואת <strong>סיכום הראיון</strong> (מכלי 04)</li>
-          <li>הדביקו את שניהם ב-ChatGPT <strong>עם הפרומפט הבא</strong></li>
-          <li><strong>העתיקו את הדוח</strong> ושלחו ללקוח במייל או בוואטסאפ</li>
-        </ol>
-        <div class="prompt-box">
-          <div class="prompt-header">
-            <span class="prompt-label">פרומפט מוכן</span>
-            <button class="copy-btn" data-prompt="tool05">📋 העתק</button>
-          </div>
-          <pre class="prompt-text" id="prompt-tool05">הנה קורות החיים של המועמד:
----
-<span class="placeholder">[הדביקו קורות חיים]</span>
----
-
-הנה סיכום הראיון שלי:
----
-<span class="placeholder">[הדביקו סיכום ראיון - או השתמשו בפלט מכלי 04]</span>
----
-
-צור דוח מועמד מקצועי לשליחה ללקוח (המעסיק) בפורמט הבא:
-
-דוח מועמד
-━━━━━━━━━━━━━━━
-סיכום מנהלים: (3-4 שורות)
-ניסיון רלוונטי: (נקודות עיקריות)
-השכלה:
-כישורים טכניים:
-התרשמות אישית: (מהראיון)
-המלצה: (למה כדאי לראיין אותו/אותה)
-
-כתוב בעברית, בטון מקצועי ומשכנע. המטרה: שהלקוח ירצה לראיין את המועמד.</pre>
-        </div>
+      <div class="toc-save">תמונת מצב מיידית</div>
+    </div>
+    <div class="toc-item">
+      <div class="toc-item-left">
+        <div class="toc-num green-num">07</div>
+        <div><div class="toc-name">תזכורות מעקב חכמות</div><div class="toc-desc">Make.com Blueprint + רשימת ChatGPT</div></div>
       </div>
+      <div class="toc-save">אפס מישהו שנשכח</div>
+    </div>
+  </div>
 
-      <!-- Tool 06 -->
-      <div class="tool-card">
-        <div class="tool-top">
-          <div class="tool-num">06</div>
-          <h4>מעקב סטטוסים אוטומטי</h4>
-          <div class="tool-badges">
-            <span class="premium-badge">PREMIUM</span>
-            <span class="verified-badge">נבדק ✓</span>
-          </div>
-        </div>
-        <a href="https://docs.google.com/spreadsheets" target="_blank" rel="noopener" class="tool-name-link">🔗 Google Sheets - טמפלייט מוכן</a>
-        <p class="tool-description">לוח בקרה שמראה בדיוק איפה כל מועמד עומד בתהליך. צבעים אוטומטיים לפי סטטוס, בלי להגדיר כלום.</p>
-        <ol class="tool-steps">
-          <li>לחצו על <strong>הכפתור למטה</strong> לפתיחת הטמפלייט</li>
-          <li>בחרו <strong>File → Make a copy</strong> כדי לשמור עותק אצלכם</li>
-          <li>התחילו <strong>למלא מועמדים</strong> - הצבעים יתעדכנו אוטומטית</li>
-        </ol>
-        <div class="template-box">
-          <h5>טמפלייט מעקב מועמדים</h5>
-          <p>עמודות: שם מועמד | משרה | לקוח | שלב בתהליך | תאריך עדכון | הערות<br>עם צבעים אוטומטיים לפי סטטוס (פנייה → ראיון → הצעה → גויס)</p>
-          <a href="https://docs.google.com/spreadsheets/d/1AFgcxlOA6JjiKLqMEFHSrl-7CFN_Ilbnc0eFGDcLfTw/copy" target="_blank" rel="noopener" class="template-link" id="sheets-template-link">📊 פתחו את הטמפלייט</a>
-        </div>
-        <div class="tip-box"><strong>טיפ:</strong> הוסיפו את הטמפלייט למועדפים ב-Google Drive כדי שיהיה תמיד זמין בקליק אחד.</div>
+  <div class="toc-section">
+    <div class="toc-cat">💬 קטגוריה 3 — תקשורת ופנייה</div>
+    <div class="toc-item">
+      <div class="toc-item-left">
+        <div class="toc-num purple-num">08</div>
+        <div><div class="toc-name">הודעות פנייה מותאמות</div><div class="toc-desc">LinkedIn / WhatsApp שמקבלות מענה</div></div>
       </div>
+      <div class="toc-save">מענה ×3</div>
+    </div>
+    <div class="toc-item">
+      <div class="toc-item-left">
+        <div class="toc-num purple-num">09</div>
+        <div><div class="toc-name">תסריט קבלת מועמדים</div><div class="toc-desc">Auto-reply WhatsApp Business מוכן</div></div>
+      </div>
+      <div class="toc-save">חוסך 3 שעות שיחות</div>
+    </div>
+  </div>
 
-      <!-- Tool 07 -->
-      <div class="tool-card">
-        <div class="tool-top">
-          <div class="tool-num">07</div>
-          <h4>תזכורות מעקב חכמות</h4>
-          <div class="tool-badges">
-            <span class="premium-badge">PREMIUM</span>
-            <span class="verified-badge">נבדק ✓</span>
-          </div>
-        </div>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
-          <a href="https://chat.openai.com" target="_blank" rel="noopener" class="tool-name-link">🔗 ChatGPT - ניתוח</a>
-          <a href="https://calendar.google.com" target="_blank" rel="noopener" class="tool-name-link">🔗 Google Calendar - תזכורות</a>
-        </div>
-        <p class="tool-description">ChatGPT מנתח את הרשימה שלכם ואומר בדיוק: למי לחזור, מתי, ומה לומר. אף מועמד לא נשכח, אף עסקה לא נופלת.</p>
-        <ol class="tool-steps">
-          <li>העתיקו את <strong>רשימת המועמדים הפעילים</strong> מהטמפלייט (כלי 06) או מהמערכת שלכם</li>
-          <li>הדביקו ב-ChatGPT <strong>עם הפרומפט הבא</strong></li>
-          <li>קבעו את <strong>התזכורות</strong> ב-Google Calendar לפי מה שהתקבל</li>
-        </ol>
-        <div class="prompt-box">
-          <div class="prompt-header">
-            <span class="prompt-label">פרומפט מוכן</span>
-            <button class="copy-btn" data-prompt="tool07">📋 העתק</button>
-          </div>
-          <pre class="prompt-text" id="prompt-tool07">הנה רשימת המועמדים הפעילים שלי עם תאריכי עדכון אחרון:
+  <div class="toc-section">
+    <div class="toc-cat">🎁 בונוס</div>
+    <div class="toc-item">
+      <div class="toc-item-left">
+        <div class="toc-num coral-num">10</div>
+        <div><div class="toc-name">סורק קו"ח AI — בוט טלגרם</div><div class="toc-desc">40 קו"ח → Top 5 תוך 5 דקות</div></div>
+      </div>
+      <div class="toc-save">6-7 שעות → 5 דקות</div>
+    </div>
+  </div>
+</div>
+</div>
 
-<span class="placeholder">[הדביקו רשימה: שם | משרה | שלב | תאריך עדכון אחרון]</span>
+<!-- ═══ SETUP PAGE ═══ -->
+<div class="page">
+<div class="setup-page">
+  <h2>⚙️ הגדרה ראשונה — 10 דקות</h2>
+  <p class="setup-sub">עשה זאת פעם אחת. כל הכלים יעבדו מיד אחרי כן.</p>
 
-התאריך היום: <span class="placeholder">[תאריך היום]</span>
+  <div class="setup-box">
+    <h3>1. הגדרת פרטיות (חובה!)</h3>
+    <div class="setup-step"><div class="step-num">1</div><p><strong>Gemini:</strong> כנס ל-<a href="https://gemini.google.com">gemini.google.com</a> → Settings → כבה "Help improve Gemini"</p></div>
+    <div class="setup-step"><div class="step-num">2</div><p><strong>ChatGPT:</strong> כנס ל-<a href="https://chat.openai.com">chat.openai.com</a> → Settings → Data controls → כבה "Improve the model for everyone"</p></div>
+    <div class="setup-step"><div class="step-num">3</div><p>✅ מעכשיו ה-AI לא מאמן על נתוני המועמדים שלך</p></div>
+    <div class="limit-note">💡 כל הפרומפטים עובדים עם <strong>Gemini</strong> (חינם), <strong>ChatGPT</strong>, או <strong>Claude</strong>. ה-Gems (כלים 01–08) מוגדרים ב-Gemini לנוחות.</div>
+  </div>
 
-צור לי רשימת תזכורות מעקב:
-1. למי צריך לחזור היום? (עבר יותר מ-3 ימים בלי עדכון)
-2. למי צריך לחזור השבוע?
-3. לכל אחד - מה בדיוק לומר בהודעה (שורה אחת)
+  <div class="setup-box">
+    <h3>2. הגדרת Google Gems (6 Gems מוכנים)</h3>
+    <div class="setup-step"><div class="step-num">1</div><p>כנס ל-<a href="https://gemini.google.com">gemini.google.com</a> → <strong>Explore Gems</strong> → <strong>New Gem</strong></p></div>
+    <div class="setup-step"><div class="step-num">2</div><p>צור 6 Gems — לכל אחד העתק את ה-System Prompt מהקובץ המצורף:</p></div>
+    <div class="setup-step"><div class="step-num"></div><p>🔍 <strong>חיפוש מועמדים</strong> — כלי 01</p></div>
+    <div class="setup-step"><div class="step-num"></div><p>🎯 <strong>דירוג משרה-מועמד</strong> — כלי 02</p></div>
+    <div class="setup-step"><div class="step-num"></div><p>⏰ <strong>מועמדים רדומים</strong> — כלי 03</p></div>
+    <div class="setup-step"><div class="step-num"></div><p>🎙️ <strong>מסכם ראיון</strong> — כלי 04</p></div>
+    <div class="setup-step"><div class="step-num"></div><p>✍️ <strong>כותב פרופיל מועמד</strong> — כלי 05</p></div>
+    <div class="setup-step"><div class="step-num"></div><p>💬 <strong>כותב הודעות פנייה</strong> — כלי 08</p></div>
+    <div class="setup-step"><div class="step-num">3</div><p>שמור את ה-URL של כל Gem — תשתמש בו שוב ושוב</p></div>
+  </div>
+
+  <div class="setup-box">
+    <h3>3. יצירת לוח המעקב (כלי 06)</h3>
+    <div class="setup-step"><div class="step-num">1</div><p>לחץ על הלינק: <a href="https://docs.google.com/spreadsheets/d/1Njfw4c8GRTnBr4bqqB0rL0KeI5yN4AbFEJeLwQvF9gY/copy"><strong>לחץ כאן לקבלת לוח המעקב שלך</strong></a></p></div>
+    <div class="setup-step"><div class="step-num">2</div><p>לחץ <strong>"Make a copy"</strong> — עותק אישי ייווצר בדרייב שלך</p></div>
+    <div class="setup-step"><div class="step-num">3</div><p>הגיליון מוכן עם כל הנוסחאות, הצבעים, וה-dropdowns. התחל למלא.</p></div>
+  </div>
+
+  <div class="setup-box">
+    <h3>4. NotebookLM לתמלול ראיונות (כלי 04)</h3>
+    <div class="setup-step"><div class="step-num">1</div><p>כנס ל-<a href="https://notebooklm.google.com">notebooklm.google.com</a> → <strong>New Notebook</strong></p></div>
+    <div class="setup-step"><div class="step-num">2</div><p>תן שם: "ראיונות מועמדים" — תשתמש בו לכל הראיונות</p></div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ TOOL 01 ═══ -->
+<div class="page">
+<div class="tool-page">
+  <div class="tool-header">
+    <div class="tool-badge blue-badge">🔍</div>
+    <div class="tool-title-block">
+      <h2>כלי 01: מנוע חיפוש מועמדים חכם</h2>
+      <div class="cat-tag">🔍 שליפה אקטיבית · חיפוש חופשי במאגר</div>
+    </div>
+  </div>
+
+  <div class="tool-meta">
+    <div class="meta-item">⏱ <strong>חוסך:</strong> 2–3 שעות לכל חיפוש</div>
+    <div class="meta-item">🔧 <strong>צריך:</strong> Gemini + קובץ Excel/CSV</div>
+    <div class="meta-item">📏 <strong>מגבלה:</strong> עד 1,500 שורות</div>
+  </div>
+
+  <div class="section-label">Gem — חיפוש מועמדים 🔍</div>
+  <div class="link-box">
+    <span>פתח את ה-Gem, העלה מאגר Excel/CSV, וכתוב מה אתה מחפש</span>
+    <a href="https://gemini.google.com/gem/1Gn7yfkyM6HlrIgxGbfJEuxow5I3mdlwB?usp=sharing">פתח Gem ←</a>
+  </div>
+
+  <div class="section-label">איך משתמשים</div>
+  <div class="example-box">
+    <strong>3 צעדים</strong>
+    1. פתח את ה-Gem "חיפוש מועמדים 🔍"<br>
+    2. העלה קובץ Excel/CSV של המאגר<br>
+    3. כתוב מה אתה מחפש: "מפתח Full Stack, 3+ שנים, React, מרכז"
+  </div>
+
+  <div class="section-label">דוגמת פלט</div>
+  <div class="example-box">
+    <strong>קלט:</strong> "מנהלת HR, 5+ שנים, ניסיון בגיוס טק, מרכז"
+    <br><br>
+    <strong>פלט:</strong><br>
+    | שם | טלפון | ניסיון | %התאמה | למה |<br>
+    | רוית לוי | 054-xxx | 7 שנות HR בהייטק | 94% | ניסיון ישיר בגיוס פיתוח |<br>
+    | דנה כהן | 052-xxx | 6 שנות HR, פינטק | 87% | רקע פיננסי + טכנולוגי |
+  </div>
+
+  <div class="tip-box">יצא את המאגר מה-CRM כ-CSV. עמודות מינימום: שם, טלפון, תפקיד, שנות ניסיון, כישורים, מיקום. ככל שיש יותר עמודות — התוצאות מדויקות יותר.</div>
+
+  <button class="prompt-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">◀</span> הצג פרומפט מלא — העתק ל-Gemini</button>
+  <div class="prompt-collapse"><div class="prompt-box">## זהות
+אתה מנוע חיפוש מועמדים מתוך קבצי Excel/CSV. עובד עם מגייסים ישראלים. תפקידך לשלוף מועמדים רלוונטיים מהמאגר על בסיס דרישות חופשיות.
+
+## יכולות
+- ניתוח קבצי Excel/CSV עם מאגרי מועמדים (עד 1,500 שורות)
+- חיפוש חופשי: תפקיד, ניסיון, טכנולוגיות, מיקום, שפות, תעשייה
+- זיהוי התאמה גם כשהניסוח שונה ("פיתוח צד שרת" = "Backend")
+- דירוג אחוזי התאמה על בסיס כל הפרמטרים יחד
+- חיפוש שלילי: "לא כולל מועמדים שכבר דיברנו איתם" (אם יש עמודת סטטוס)
+
+## טון
+מכונה. ממוקד. ללא ריכוך, ללא הקדמות, רק נתונים.
+
+## כשפותחים שיחה
+הצג זאת בלבד:
+---
+🔍 חיפוש מועמדים
+העלה קובץ Excel/CSV של המאגר + כתוב מה אתה מחפש.
+דוגמה: "מפתח Full Stack, 3+ שנים, React, מרכז"
+---
+
+## כללים
+- תמיד טבלה. אף פעם לא פסקאות
+- מקסימום 10 תוצאות, מהגבוה לנמוך
+- אין נתון בעמודה = "חסר" — לא ממציא ולא מנחש
+- אם המאגר מעל 1,500 שורות: "מעבד 1,500 ראשונות, מומלץ לסנן לפני"
+- אם לא צורף קובץ: "העלה קובץ Excel/CSV של המאגר"
+- בסוף כל תוצאה הוסף שורה: "לסנן? להרחיב חיפוש?"
+- עברית בלבד
+
+## תבנית פלט
+| שם מלא | טלפון | ניסיון רלוונטי | %התאמה | למה מתאים (שורה אחת) |
+בסוף: "לסנן? להרחיב חיפוש?"</div></div>
+</div>
+</div>
+
+<!-- ═══ TOOL 02 ═══ -->
+<div class="page">
+<div class="tool-page">
+  <div class="tool-header">
+    <div class="tool-badge blue-badge">🎯</div>
+    <div class="tool-title-block">
+      <h2>כלי 02: התאמה אוטומטית משרה–מועמד</h2>
+      <div class="cat-tag">🔍 שליפה אקטיבית · ציון 0–100 לכל מועמד</div>
+    </div>
+  </div>
+
+  <div class="tool-meta">
+    <div class="meta-item">⏱ <strong>חוסך:</strong> שעה לכל משרה</div>
+    <div class="meta-item">🔧 <strong>צריך:</strong> Gemini + תיאור משרה + קובץ Excel/CSV</div>
+  </div>
+
+  <div class="section-label">Gem — דירוג משרה-מועמד 🎯</div>
+  <div class="link-box">
+    <span>פתח את ה-Gem, הדבק תיאור משרה + העלה מאגר</span>
+    <a href="https://gemini.google.com/gem/1YxcksTEuCqBd-yzuegzxCIRcUqJBR8W9?usp=sharing">פתח Gem ←</a>
+  </div>
+
+  <div class="section-label">איך משתמשים</div>
+  <div class="example-box">
+    <strong>3 צעדים</strong>
+    1. פתח את ה-Gem "דירוג משרה-מועמד 🎯"<br>
+    2. הדבק את תיאור המשרה המלא (הפרד חובה מיתרון)<br>
+    3. העלה קובץ Excel/CSV של המאגר → קבל טבלת דירוג 0-100
+  </div>
+
+  <div class="section-label">דוגמת פלט</div>
+  <div class="example-box">
+    <strong>קלט:</strong> Team Lead Backend, חובה: 5+ שנים Python, AWS, ניהול. יתרון: Kubernetes.
+    <br><br>
+    <strong>פלט:</strong><br>
+    | ✅ עידו מלכה | 91 | ✓ הכל | 7 שנות Python + ניהול 8 + AWS native |<br>
+    | 🟡 נועם כץ | 62 | ניהול צוות | Python חזק, ללא ניסיון ניהולי |<br>
+    | ❌ רוני אברהם | 34 | Python, AWS | Java בלבד |
+  </div>
+
+  <div class="tip-box">הדבק את תיאור המשרה המלא, לא רק כותרת. הפרד בין דרישות חובה ליתרון — זה משנה את הציון.</div>
+
+  <button class="prompt-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">◀</span> הצג פרומפט מלא — העתק ל-Gemini</button>
+  <div class="prompt-collapse"><div class="prompt-box">## זהות
+אתה מערכת דירוג מועמדים מול משרות. עובד עם מגייסים ישראלים. תפקידך לדרג כל מועמד במאגר מ-0 עד 100 מול תיאור משרה ספציפי.
+
+## יכולות
+- השוואה שיטתית של מועמד מול דרישות חובה ויתרון
+- דירוג 0-100 עם משקלות: חובות (60%), יתרון (25%), התאמה כללית (15%)
+- זיהוי מועמדים שעומדים בכל דרישות החובה לעומת כאלה שחסרה דרישה קריטית
+- חילוץ הסיבה המרכזית לציון, לא רשימה גנרית
+
+## טון
+שופט. אובייקטיבי. ללא ריכוך. אם מועמד לא מתאים, הציון ישקף את זה.
+
+## כשפותחים שיחה
+הצג זאת בלבד:
+---
+🎯 דירוג משרה-מועמד
+1. הדבק תיאור משרה (הפרד חובה מיתרון)
+2. העלה קובץ Excel/CSV של המאגר
+אדרג כל מועמד 0-100.
+---
+
+## כללים
+- דרישת חובה שחסרה = ציון מקסימלי 50, גם אם כל השאר מושלם
+- ✅ מעל 70 | 🟡 50-70 | ❌ מתחת ל-50
+- עמודת "חובות חסרות" חייבת להופיע — אם הכל קיים, כתוב "✓ הכל"
+- אין נתון במאגר = "חסר" — לא מנחש
+- מקסימום 20 מועמדים בטבלה. אם יש יותר: "מציג Top 20. רוצה להמשיך?"
+- הפרד בין דרישות חובה ליתרון. אם המשתמש לא הפריד — שאל: "מה חובה ומה יתרון?"
+- עברית בלבד
+
+## תבנית פלט
+| סטטוס | שם | ציון | חובות חסרות | למה הציון הזה (שורה אחת) |
+בסוף: "רוצה פירוט על מועמד ספציפי? לסנן רק ✅?"</div></div>
+</div>
+</div>
+
+<!-- ═══ TOOL 03 ═══ -->
+<div class="page">
+<div class="tool-page">
+  <div class="tool-header">
+    <div class="tool-badge blue-badge">⏰</div>
+    <div class="tool-title-block">
+      <h2>כלי 03: העלאת מועמדים רדומים</h2>
+      <div class="cat-tag">🔍 שליפה אקטיבית · מועמדים ישנים שמתאימים היום</div>
+    </div>
+  </div>
+
+  <div class="tool-meta">
+    <div class="meta-item">⏱ <strong>חוסך:</strong> מועמדים שנשכחו = כסף על הרצפה</div>
+    <div class="meta-item">🔧 <strong>צריך:</strong> Gemini + Excel/CSV + רשימת משרות פתוחות</div>
+  </div>
+
+  <div class="section-label">Gem — מועמדים רדומים ⏰</div>
+  <div class="link-box">
+    <span>פתח את ה-Gem, העלה מאגר + רשום משרות פתוחות</span>
+    <a href="https://gemini.google.com/gem/1Xxn11gmHb-NjSXVW_HDS3OhPUYqmK5wj?usp=sharing">פתח Gem ←</a>
+  </div>
+
+  <div class="section-label">איך משתמשים</div>
+  <div class="example-box">
+    <strong>3 צעדים</strong>
+    1. פתח את ה-Gem "מועמדים רדומים ⏰"<br>
+    2. העלה קובץ Excel/CSV של המאגר<br>
+    3. רשום את המשרות הפתוחות שלך → קבל רשימת מועמדים שנדחו בעבר ומתאימים היום
+  </div>
+
+  <div class="section-label">דוגמת פלט</div>
+  <div class="example-box">
+    <strong>קלט:</strong> משרות: 1. VP R&D, 10+ שנים 2. Senior DevOps, AWS
+    <br><br>
+    <strong>פלט:</strong><br>
+    | אורי שלום | נדחה: חסרו 3 שנות ניהול | היום: CTO בסטארטאפ | VP R&D | 🔴 |<br>
+    | מיכל דור | נדחתה: AWS Junior | היום: SA certified | DevOps | 🟡 |<br>
+    <br>+ הודעת חזרה מותאמת לכל אחד
+  </div>
+
+  <div class="tip-box">מגייסים יושבים על מאגרים של אלפי שמות ולא נזכרים במועמדים שנפסלו. שאילתה אחת = מועמדים שכבר מכירים אתכם ועונים מהר יותר.</div>
+
+  <button class="prompt-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">◀</span> הצג פרומפט מלא — העתק ל-Gemini</button>
+  <div class="prompt-collapse"><div class="prompt-box">## זהות
+אתה מומחה לשחזור מועמדים רדומים. תפקידך לסרוק מאגרי מועמדים ישנים ולמצוא התאמות חדשות למשרות פתוחות. אתה יודע שמועמד שנדחה לפני שנה הוא לא אותו מועמד היום.
+
+## יכולות
+- השוואת פרופיל נוכחי (אם עודכן) מול פרופיל ישן
+- זיהוי שינויי קריירה: קידום, החלפת תעשייה, רכישת הסמכות
+- התאמה הפוכה: לא רק "המועמד גדל" אלא גם "המשרה החדשה שונה ממה שהיה"
+- חישוב זמן מאז הפנייה האחרונה — כלל אצבע: מעל 6 חודשים = רלוונטי לחזור
+
+## טון
+בלש. סוקר היסטוריה, מצביע על שינויים, מספק ראיות. לא מנחש — מצביע על מה שהשתנה בנתונים.
+
+## כשפותחים שיחה
+הצג זאת בלבד:
+---
+⏰ מועמדים רדומים
+1. העלה קובץ Excel/CSV של המאגר
+2. רשום את המשרות הפתוחות שלך כרגע
+אמצא מי נדחה בעבר ומתאים היום.
+---
+
+## כללים
+- רק מועמדים עם סטטוס "נדחה" / "לא מתאים" / "ויתר" / ללא סטטוס מעל 6 חודשים
+- אם אין עמודת סטטוס או תאריך: "אין נתוני היסטוריה — אנתח התאמה למשרות הפתוחות בלבד"
+- חייב להסביר את השינוי: מה היה אז ומה עכשיו
+- דחיפות: 🔴 גבוהה | 🟡 בינונית | ⚪ נמוכה
+- מקסימום 15 מועמדים רדומים
+- עברית בלבד
+
+## תבנית פלט
+| שם | נדחה אז כי | מתאים היום כי | למשרה | דחיפות | הודעה מוצעת |
+בסוף: "רוצה שאכתוב הודעת חזרה מלאה לכל אחד?"</div></div>
+</div>
+</div>
+
+<!-- ═══ TOOL 04 ═══ -->
+<div class="page">
+<div class="tool-page">
+  <div class="tool-header">
+    <div class="tool-badge green-badge">🎙️</div>
+    <div class="tool-title-block">
+      <h2>כלי 04: סיכום ראיון בלחיצה</h2>
+      <div class="cat-tag">⚡ חיסול ניירת · NotebookLM → Gem מסכם</div>
+    </div>
+  </div>
+
+  <div class="tool-meta">
+    <div class="meta-item">⏱ <strong>חוסך:</strong> 20 דקות לכל ראיון</div>
+    <div class="meta-item">🔧 <strong>צריך:</strong> NotebookLM (חינם) + Gemini (חינם)</div>
+  </div>
+
+  <div class="section-label">Gem — מסכם ראיון 🎙️</div>
+  <div class="link-box">
+    <span>פתח את ה-Gem, צרף הקלטה או מחברת NotebookLM</span>
+    <a href="https://gemini.google.com/gem/1ZBtmMypITLjIFpWlSORVhdWvSe5S15_3?usp=sharing">פתח Gem ←</a>
+  </div>
+
+  <div class="section-label">איך משתמשים</div>
+  <div class="example-box">
+    <strong>3 צעדים</strong>
+    1. הקלט ראיון (Google Meet / Zoom / אפליקציית הקלטה)<br>
+    2. העלה ל-NotebookLM → מחברת "ראיונות מועמדים"<br>
+    3. פתח את ה-Gem → צרף את המחברת כקובץ → קבל סיכום מובנה
+  </div>
+
+  <div class="section-label">דוגמת פלט</div>
+  <div class="example-box">
+    <strong>📋 [שם] | Backend Lead</strong><br>
+    ✅ חוזקות: ניהול צוות 6 | מעבר ל-microservices | יציבות 4 שנים<br>
+    ⚠️ לבדיקה: סיבת עזיבה לא צוינה | ניסיון ניהולי במקום אחד בלבד<br>
+    💰 שכר: 45,000 ₪ | 📅 זמינות: חודש<br>
+    📌 המלצה: ✅ כן — ניסיון ניהולי + טכני חזק
+  </div>
+
+  <div class="tip-box">הסיכום עובר ישירות ל-Gem "כותב פרופיל מועמד ✍️" — הדבק את הפלט שם ותקבל pitch מוכן ללקוח.</div>
+
+  <button class="prompt-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">◀</span> הצג פרומפט מלא — העתק ל-Gemini</button>
+  <div class="prompt-collapse"><div class="prompt-box">## זהות
+אתה מסכם ראיונות עבודה מקצועי. עובד עם מגייסים ישראלים. תפקידך למלא תבנית קבועה ולא לחרוג ממנה לעולם.
+
+## יכולות
+- ניתוח תמלולי ראיונות בעברית ובאנגלית
+- זיהוי נקודות חוזק, חולשות, ו-red flags
+- הערכת התאמה לתפקיד על בסיס התשובות
+- חילוץ ציפיות שכר וזמינות גם כשנאמרו בעקיפין
+- זיהוי סתירות בין מה שנאמר לבין מה שכתוב בקו"ח
+
+## טון
+פקיד מדויק. יבש. עובדתי. ללא רגש וללא שיפוט.
+
+## כשפותחים שיחה
+הצג זאת בלבד:
+---
+📋 מסכם ראיון
+צרף את קובץ ההקלטה (MP3/M4A/WAV) או הדבק תמלול → אמלא את התבנית.
+---
+
+## כללים
+- תמיד 3 חוזקות בדיוק. לא 2. לא 4
+- תמיד 2-3 נקודות לבדיקה
+- אם מידע חסר (שכר, זמינות) — כתוב "לא עלה בראיון"
+- אין הקדמות לפני התבנית
+- עברית בלבד
+
+## תבנית הפלט
+━━━━━━━━━━━━━━━━━━━━━━
+📋 [שם מועמד] | [תפקיד] | [תאריך אם צוין]
+━━━━━━━━━━━━━━━━━━━━━━
+✅ חוזקות (3 בדיוק):
+1. [חוזקה ספציפית עם דוגמה מהראיון]
+2. [חוזקה ספציפית]
+3. [חוזקה ספציפית]
+
+⚠️ לבדיקה (2-3):
+1. [נקודה + למה זה דורש בדיקה]
+2. [נקודה]
+
+🚩 דגלים אדומים: [רק אם רלוונטי]
+💰 שכר מבוקש: [סכום ₪ ברוטו / "לא עלה"]
+📅 זמינות: [מיידי / X שבועות / "לא עלה"]
+⭐ רושם כללי: [משפט אחד]
+📌 המלצה: [✅ כן / ❌ לא / 🟡 אולי] — [סיבה]
+━━━━━━━━━━━━━━━━━━━━━━</div></div>
+</div>
+</div>
+
+<!-- ═══ TOOL 05 ═══ -->
+<div class="page">
+<div class="tool-page">
+  <div class="tool-header">
+    <div class="tool-badge green-badge">✍️</div>
+    <div class="tool-title-block">
+      <h2>כלי 05: פרופיל מועמד ללקוח</h2>
+      <div class="cat-tag">⚡ חיסול ניירת · קו"ח → pitch שהלקוח קורא</div>
+    </div>
+  </div>
+  <div class="tool-meta">
+    <div class="meta-item">⏱ <strong>חוסך:</strong> 30 דקות לכל מועמד</div>
+    <div class="meta-item">🔧 <strong>צריך:</strong> Gemini (חינם)</div>
+  </div>
+
+  <div class="section-label">Gem — כותב פרופיל מועמד ✍️</div>
+  <div class="link-box">
+    <span>פתח את ה-Gem, הדבק קו"ח + סיכום ראיון (מ-Gem 04)</span>
+    <a href="https://gemini.google.com/gem/1X1LJvvlOMeT0d723LPN_bdyBHiNoDQ8W?usp=sharing">פתח Gem ←</a>
+  </div>
+
+  <div class="section-label">איך משתמשים</div>
+  <div class="example-box">
+    <strong>3 צעדים</strong>
+    1. פתח את ה-Gem "כותב פרופיל מועמד ✍️"<br>
+    2. הדבק קו"ח + סיכום מ-Gem מסכם ראיון (אופציונלי)<br>
+    3. ענה: לאיזו משרה? מה הדבר הכי חזק? → קבל pitch מוכן
+  </div>
+
+  <div class="section-label">דוגמת פלט</div>
+  <div class="example-box">
+    <strong>נועה בן-דוד | Head of Product</strong><br><br>
+    <strong>למה מתאימה:</strong> נועה לקחה מוצר שעמד על 2,000 משתמשים והגיעה ל-40,000 תוך שנה. עשתה את זה עם 3 מפתחים ותעדוף אגרסיבי.<br><br>
+    <strong>הניסיון:</strong> Product Lead ב-Medtronic (3 שנים) | Senior PM ב-Vim (2 שנים)<br>
+    <strong>למה עכשיו:</strong> סיימה פרויקט רגולטורי ומחפשת סביבה מהירה<br>
+    <strong>המלצה:</strong> שילוב נדיר של healthtech + growth + ידע רגולטורי
+  </div>
+
+  <button class="prompt-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">◀</span> הצג פרומפט מלא — העתק ל-Gemini</button>
+  <div class="prompt-collapse"><div class="prompt-box">## זהות
+אתה קופירייטר לתחום גיוס. לא כותב דוחות — כותב pitches. המטרה: לגרום ל-hiring manager לרצות לראיין את המועמד עוד לפני שסיים לקרוא.
+
+## יכולות
+- הפיכת קו"ח יבש לסיפור מקצועי משכנע
+- חילוץ "הדבר היחיד" שמייחד את המועמד מ-100 אחרים
+- כתיבה בגוף שלישי עם אנרגיה
+- התאמת הטון לתעשיית הלקוח (סטארטאפ ≠ בנק ≠ קמעונאות)
+
+## טון
+קופירייטר שיווקי. מוכר את המועמד. לא ביורוקרטי.
+
+## כשפותחים שיחה
+שאל את 3 השאלות האלה ביחד:
+---
+כדי לכתוב פרופיל שעובד, אני צריך:
+1. קו"ח המועמד (הדבק טקסט או צרף קובץ)
+2. סיכום ראיון (אם עשית ב-Gem מסכם ראיון 🎙️ — הדבק כאן)
+3. לאיזו משרה? מה הדבר הכי חזק במועמד?
+---
+
+## כללים
+- מקסימום 200 מילה סה"כ
+- ללא bullets (חוץ מ"ניסיון רלוונטי")
+- לא מציג חולשות — זה pitch, לא ביקורת
+- אל תמציא — רק מה שיש בקלט
+- עברית מקצועית. ללא: "הנ"ל", "כאמור", "בנוסף לכך"
+
+## תבנית פלט — 5 חלקים בדיוק
+**[שם מלא] | [תפקיד מבוקש]**
+**למה מתאים/ה:** [3-4 משפטים, התחל עם הדבר הכי חזק]
+**הניסיון הרלוונטי:** [2-3 שורות רלוונטיות בלבד]
+**מהראיון:** [רק אם יש סיכום ראיון]
+**למה עכשיו:** [משפט אחד]
+**המלצה:** [משפט אחד עם סיבה ספציפית]</div></div>
+</div>
+</div>
+
+<!-- ═══ TOOL 06 ═══ -->
+<div class="page">
+<div class="tool-page">
+  <div class="tool-header">
+    <div class="tool-badge green-badge">📊</div>
+    <div class="tool-title-block">
+      <h2>כלי 06: לוח מעקב Pipeline</h2>
+      <div class="cat-tag">⚡ חיסול ניירת · Google Sheets מוכן עם נוסחאות</div>
+    </div>
+  </div>
+
+  <div class="tool-meta">
+    <div class="meta-item">⏱ <strong>חוסך:</strong> תמונת מצב מיידית במקום 15 שיחות ביום</div>
+    <div class="meta-item">🔧 <strong>צריך:</strong> Google Account בלבד (חינם)</div>
+  </div>
+
+  <div class="section-label">מה בפנים</div>
+  <div class="example-box">
+    <strong>עמודות מוכנות</strong>
+    שם מועמד · משרה · לקוח · שלב בתהליך (dropdown) · תאריך פנייה · עדכון אחרון · מעקב הבא · ימים ללא עדכון (נוסחה) · דחיפות (נוסחה)
+    <br><br>
+    <strong>שלבי Pipeline (dropdown מוכן)</strong>
+    🔵 פנייה ראשונית → 🟡 ראיון טלפוני → 🟠 ראיון עם הלקוח → 🟢 הצעה → ✅ גויס → 🔴 נפסל
+    <br><br>
+    <strong>צבעים אוטומטיים</strong>
+    🔴 מעל 5 ימים ללא עדכון — פעל עכשיו · 🟡 3–5 ימים — בדוק קרוב · 🟢 פחות מ-3 — בסדר
+  </div>
+
+  <div class="section-label">לינק לגיליון</div>
+  <div class="link-box">
+    <span>לחץ לקבלת עותק אישי</span>
+    <a href="https://docs.google.com/spreadsheets/d/1Njfw4c8GRTnBr4bqqB0rL0KeI5yN4AbFEJeLwQvF9gY/copy">קבל את הגיליון ←</a>
+  </div>
+
+  <div class="tip-box">הגיליון כולל גם טאב "מאגר מועמדים" עם 14 עמודות — שם אפשר לשמור את כל המועמדים ולייצא ל-CSV לשימוש עם כלים 01–03.</div>
+</div>
+</div>
+
+<!-- ═══ TOOL 07 ═══ -->
+<div class="page">
+<div class="tool-page">
+  <div class="tool-header">
+    <div class="tool-badge green-badge">⏰</div>
+    <div class="tool-title-block">
+      <h2>כלי 07: תזכורות מעקב חכמות</h2>
+      <div class="cat-tag">⚡ חיסול ניירת · AI יומי + אוטומציה ב-Make</div>
+    </div>
+  </div>
+
+  <div class="tool-meta">
+    <div class="meta-item">⏱ <strong>חוסך:</strong> אפס מועמד שנשכח</div>
+    <div class="meta-item">🔧 <strong>צריך:</strong> Gemini / ChatGPT / Claude + Make.com (אופציונלי)</div>
+  </div>
+
+  <div class="section-label">אופציה א — Prompt יומי (30 שניות כל בוקר)</div>
+  <div class="prompt-box">הנה רשימת המועמדים הפעילים שלי:
+[הדבק: שם | משרה | שלב | תאריך עדכון אחרון]
+התאריך היום: [תאריך]
+
+צור רשימת תזכורות:
+1. למי לחזור היום? (מעל 3 ימים ללא עדכון)
+2. למי לחזור השבוע?
+3. לכל אחד — מה בדיוק לומר בהודעה (שורה אחת)
 4. סדר לפי דחיפות
 
-פורמט: טבלה עם עמודות: שם | מתי לחזור | מה לומר | דחיפות (גבוהה/בינונית/נמוכה)</pre>
-        </div>
-        <div class="tip-box"><strong>טיפ:</strong> הריצו את הכלי הזה כל בוקר - זה לוקח 30 שניות ושומר לכם שעות של "אה, שכחתי לחזור ל..."</div>
-      </div>
-    </div>
+פורמט: טבלה: שם | מתי לחזור | מה לומר | דחיפות</div>
 
-    <!-- ═══════ CATEGORY 3: PURPLE - תקשורת ═══════ -->
-    <div class="category cat-purple reveal">
-      <div class="category-header">
-        <div class="category-icon">💬</div>
-        <h3>תקשורת ופנייה</h3>
-      </div>
-
-      <!-- Tool 08 -->
-      <div class="tool-card">
-        <div class="tool-top">
-          <div class="tool-num">08</div>
-          <h4>הודעות פנייה מותאמות אישית</h4>
-          <div class="tool-badges">
-            <span class="premium-badge">PREMIUM</span>
-            <span class="verified-badge">נבדק ✓</span>
-          </div>
-        </div>
-        <a href="https://chat.openai.com" target="_blank" rel="noopener" class="tool-name-link">🔗 ChatGPT - chat.openai.com</a>
-        <p class="tool-description">הודעות לינקדאין שמרגישות אישיות - אבל בקנה מידה גדול. כל הודעה מזכירה משהו ספציפי מהפרופיל של המועמד.</p>
-        <ol class="tool-steps">
-          <li>הכינו <strong>רשימה של 5-10 מועמדים</strong> עם שם, תפקיד, חברה, ופרט בולט</li>
-          <li>הדביקו ב-ChatGPT <strong>עם הפרומפט</strong></li>
-          <li>קבלו <strong>הודעות מוכנות</strong> להעתקה ללינקדאין - כל אחת ייחודית</li>
-        </ol>
-        <div class="prompt-box">
-          <div class="prompt-header">
-            <span class="prompt-label">פרומפט מוכן</span>
-            <button class="copy-btn" data-prompt="tool08">📋 העתק</button>
-          </div>
-          <pre class="prompt-text" id="prompt-tool08">הנה רשימת מועמדים שאני רוצה לפנות אליהם בלינקדאין:
-
-1. <span class="placeholder">[שם]</span> | <span class="placeholder">[תפקיד]</span> ב-<span class="placeholder">[חברה]</span> | <span class="placeholder">[פרט בולט]</span>
-2. <span class="placeholder">[שם]</span> | <span class="placeholder">[תפקיד]</span> ב-<span class="placeholder">[חברה]</span> | <span class="placeholder">[פרט בולט]</span>
-3. <span class="placeholder">[שם]</span> | <span class="placeholder">[תפקיד]</span> ב-<span class="placeholder">[חברה]</span> | <span class="placeholder">[פרט בולט]</span>
-
-כתוב לכל אחד הודעת פנייה בלינקדאין:
-- מקסימום 3 שורות
-- הזכר משהו ספציפי מהפרופיל שלו (לא גנרי!)
-- טון: ידידותי ומקצועי
-- בעברית
-- אל תציין שכר
-- סיום עם שאלה פתוחה
-
-דוגמה לטון הנכון:
-"היי [שם], ראיתי שאת/ה ב-[חברה] כבר [X] שנים - מרשים! יש לי משהו שיכול להיות מעניין. אפשר לדבר?"</pre>
-        </div>
-        <div class="tip-box"><strong>טיפ:</strong> שנו קצת כל הודעה לפני שליחה - זה שומר על אותנטיות ומונע חסימה מלינקדאין.</div>
-      </div>
-
-      <!-- Tool 09 -->
-      <div class="tool-card">
-        <div class="tool-top">
-          <div class="tool-num">09</div>
-          <h4>בוט קבלת מועמדים</h4>
-          <div class="tool-badges">
-            <span class="premium-badge">PREMIUM</span>
-            <span class="verified-badge">נבדק ✓</span>
-          </div>
-        </div>
-        <a href="https://business.whatsapp.com" target="_blank" rel="noopener" class="tool-name-link">🔗 WhatsApp Business - הורדה חינמית</a>
-        <p class="tool-description">מועמד חדש ששולח הודעה מקבל תשובה מיידית עם שאלון קצר. רושם ראשוני מקצועי, בלי שתצטרכו להיות ליד הטלפון.</p>
-        <ol class="tool-steps">
-          <li>הורידו <strong>WhatsApp Business</strong> (חינם, נפרד מהוואטסאפ הרגיל)</li>
-          <li>היכנסו ל-<strong>Settings → Business Tools → Away message</strong></li>
-          <li><strong>הפעילו</strong> והדביקו את ההודעה מלמטה</li>
-        </ol>
-        <div class="wa-message" id="wa-msg">
-          <span class="wa-label">WhatsApp</span>
-היי! 👋 תודה שפנית.<br><br>
-אני <span class="placeholder" style="color:#b8720a">[שם]</span>, מגייס/ת ב-<span class="placeholder" style="color:#b8720a">[שם החברה/משרד]</span>.<br><br>
-כדי שאוכל לעזור לך בצורה הכי טובה, ענה/י בבקשה על 4 שאלות קצרות:<br><br>
-1️⃣ באיזה תחום את/ה מחפש/ת עבודה?<br>
-2️⃣ כמה שנות ניסיון יש לך בתחום?<br>
-3️⃣ מה ציפיות השכר שלך? (ברוטו)<br>
-4️⃣ מתי את/ה זמין/ה להתחיל?<br><br>
-אחזור אליך תוך 24 שעות עם משרות רלוונטיות! 🙌
-        </div>
-        <div style="text-align:center;margin-top:16px;">
-          <button class="copy-btn" id="wa-copy-btn" style="background:var(--green-bg);border-color:var(--green-border);color:var(--green);padding:10px 24px;font-size:14px;">📋 העתק הודעה</button>
-        </div>
-        <div class="tip-box"><strong>טיפ:</strong> הגדירו את ההודעה לשעות מסוימות (למשל 20:00-08:00) ובסופי שבוע, כדי שזה ירגיש טבעי.</div>
-      </div>
-    </div>
-
-    <!-- ═══════ CATEGORY 4: CORAL - בונוס ═══════ -->
-    <div class="category cat-coral reveal">
-      <div class="category-header">
-        <div class="category-icon">🎁</div>
-        <h3>בונוס - כלי חינמי שאפשר לנסות עכשיו</h3>
-      </div>
-
-      <!-- Tool 10 -->
-      <div class="tool-card">
-        <div class="tool-top">
-          <div class="tool-num">10</div>
-          <h4>סורק קורות חיים AI - בוט טלגרם</h4>
-          <div class="tool-badges">
-            <span class="premium-badge">PREMIUM</span>
-            <span class="verified-badge">נבדק ✓</span>
-          </div>
-        </div>
-        <a href="https://t.me/resumescrenerbot" target="_blank" rel="noopener" class="tool-name-link">🔗 @resumescrenerbot - בוט טלגרם חינמי</a>
-        <p class="tool-description">שולחים דרישות משרה + קורות חיים ומקבלים ציון 0-100, טבלת חוזקות/חולשות, זיהוי פערים, והמלצה. בעברית, חינם לגמרי.</p>
-        <ol class="tool-steps">
-          <li>לחצו על <strong>הלינק למעלה</strong> לפתיחת הבוט בטלגרם</li>
-          <li>שלחו הודעה עם <strong>דרישות המשרה</strong></li>
-          <li>העלו <strong>קובץ קורות חיים</strong> (PDF או Word)</li>
-          <li>קבלו <strong>ניתוח מלא</strong>: ציון, חוזקות, חולשות, פערים, המלצה</li>
-        </ol>
-        <div class="tip-box"><strong>טיפ מתקדם:</strong> שלחו מספר קורות חיים לאותה משרה וקבלו טבלת השוואה מסודרת. מושלם כשצריך לבחור בין 3-4 מועמדים סופיים.</div>
-      </div>
-    </div>
-
+  <div class="section-label">אופציה ב — אוטומציה מלאה (Make Blueprint)</div>
+  <div class="example-box">
+    <strong>מה עושה:</strong> כל יום ב-08:30 → סורק את לוח המעקב (כלי 06) → שולח WhatsApp עם רשימת מי מחכה<br>
+    <strong>מה צריך:</strong> חשבון Make.com (חינמי) + חשבון Green API (WhatsApp)<br>
+    <strong>איך מגדירים:</strong> ייבא ל-Make את הקובץ: blueprint-07-reminders.json מהערכה
   </div>
-</section>
 
-<!-- ═══════ CTA ═══════ -->
-<section class="cta-section">
-  <div class="container">
-    <div class="cta-card reveal">
-      <h3>שאלות? צריכים עזרה?</h3>
-      <p>אני כאן בשביל זה. שלחו הודעה ואחזור אליכם תוך שעות.</p>
-      <a href="https://wa.me/972546232063?text=%D7%94%D7%99%D7%99%20%D7%92%D7%99%D7%90%2C%20%D7%A7%D7%A0%D7%99%D7%AA%D7%99%20%D7%90%D7%AA%20%D7%94%D7%A2%D7%A8%D7%9B%D7%94%20%D7%9C%D7%9E%D7%92%D7%99%D7%99%D7%A1%D7%99%D7%9D%20%D7%95%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94" target="_blank" rel="noopener" class="cta-btn">💬 שלחו הודעה לגיא</a>
+  <div class="tip-box">התחל עם אופציה א (prompt יומי). כשמרגיש שזה עובד — שדרג לאופציה ב. לא חייבים את שתיהן ביחד.</div>
+</div>
+</div>
+
+<!-- ═══ TOOL 08 ═══ -->
+<div class="page">
+<div class="tool-page">
+  <div class="tool-header">
+    <div class="tool-badge purple-badge">💬</div>
+    <div class="tool-title-block">
+      <h2>כלי 08: הודעות פנייה מותאמות אישית</h2>
+      <div class="cat-tag">💬 תקשורת · LinkedIn / WhatsApp שמקבלות מענה</div>
     </div>
   </div>
-</section>
 
-<!-- ═══════ FOOTER ═══════ -->
-<footer>
-  <div class="container">
-    <p>&copy; 2026 גיא כהן - יועץ AI לעסקים</p>
-    <a href="https://www.linkedin.com/in/guycohen-ai/" target="_blank" rel="noopener">עקבו אחריי בלינקדאין</a>
+  <div class="tool-meta">
+    <div class="meta-item">⏱ <strong>חוסך:</strong> שעה ל-20 הודעות מותאמות</div>
+    <div class="meta-item">🔧 <strong>צריך:</strong> Gemini (חינם)</div>
   </div>
-</footer>
 
-<script>
-// ═══════ COPY PROMPT (using textContent for safety) ═══════
-function copyText(text, btn) {
-  navigator.clipboard.writeText(text).then(function() {
-    showCopied(btn);
-  }).catch(function() {
-    // Fallback for older browsers
-    var textarea = document.createElement('textarea');
-    textarea.value = text;
-    textarea.style.position = 'fixed';
-    textarea.style.left = '-9999px';
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textarea);
-    showCopied(btn);
-  });
-}
+  <div class="section-label">Gem — כותב הודעות פנייה 💬</div>
+  <div class="link-box">
+    <span>פתח את ה-Gem, תן שם מועמד + פרט בולט + משרה</span>
+    <a href="https://gemini.google.com/gem/1LfFqrT_WJOtO-tjCMoG_EMiVl9s23ZSp?usp=sharing">פתח Gem ←</a>
+  </div>
 
-function showCopied(btn) {
-  var originalText = btn.textContent;
-  btn.classList.add('copied');
-  btn.textContent = '\u2713 \u05D4\u05D5\u05E2\u05EA\u05E7!';
-  setTimeout(function() {
-    btn.classList.remove('copied');
-    btn.textContent = originalText;
-    btn.style.background = '';
-    btn.style.color = '';
-  }, 2000);
-}
+  <div class="section-label">איך משתמשים</div>
+  <div class="example-box">
+    <strong>3 צעדים</strong>
+    1. פתח את ה-Gem "כותב הודעות פנייה 💬"<br>
+    2. ציין: פלטפורמה (LinkedIn/WhatsApp), משרה, שם מועמד + פרט בולט<br>
+    3. קבל הודעה מותאמת ב-3 משפטים + הסבר למה היא תעבוד
+  </div>
 
-// Attach click handlers to all copy buttons
-document.querySelectorAll('.copy-btn[data-prompt]').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    var promptId = 'prompt-' + btn.getAttribute('data-prompt');
-    var promptEl = document.getElementById(promptId);
-    if (promptEl) {
-      copyText(promptEl.textContent, btn);
-    }
-  });
-});
+  <div class="section-label">דוגמת פלט</div>
+  <div class="example-box">
+    <strong>קלט:</strong> לינקדאין. שרון דוד, Backend Lead ב-Wix, 6 שנים. משרה: CTO פינטק.<br><br>
+    <strong>פלט:</strong> "היי שרון, ראיתי שאתה מוביל Backend ב-Wix כבר 6 שנים — ובמיוחד את המעבר ל-microservices. יש לי תפקיד CTO בסטארטאפ פינטק בצמיחה. שווה 10 דקות השבוע?"<br><br>
+    💡 עובד כי: ספציפי (Wix + microservices), CTA קל (10 דקות)
+  </div>
 
-// WhatsApp message copy
-var waCopyBtn = document.getElementById('wa-copy-btn');
-if (waCopyBtn) {
-  waCopyBtn.addEventListener('click', function() {
-    var waMsg = document.getElementById('wa-msg');
-    if (waMsg) {
-      copyText(waMsg.textContent.replace('WhatsApp', '').trim(), waCopyBtn);
-      waCopyBtn.style.background = 'var(--green)';
-      waCopyBtn.style.color = '#fff';
-    }
-  });
-}
+  <div class="tip-box">אחרי 48 שעות ללא מענה — כתוב ב-Gem: "follow-up ל-[שם]". תקבל הודעת מעקב שונה מההודעה הראשונה.</div>
 
-// ═══════ SCROLL REVEAL ═══════
-var observer = new IntersectionObserver(function(entries) {
-  entries.forEach(function(entry) {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, {
-  threshold: 0.1,
-  rootMargin: '0px 0px -40px 0px'
-});
+  <button class="prompt-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')"><span class="arrow">◀</span> הצג פרומפט מלא — העתק ל-Gemini</button>
+  <div class="prompt-collapse"><div class="prompt-box">## זהות
+אתה מומחה פנייה ישירה למועמדים (Direct Sourcing) לשוק הישראלי. כותב הודעות שנפתחות — לא הודעות "מקצועיות".
 
-document.querySelectorAll('.reveal').forEach(function(el) {
-  observer.observe(el);
-});
-</script>
+## יכולות
+- כתיבת הודעות LinkedIn InMail (עד 300 תווים) ו-WhatsApp
+- התאמה אישית על בסיס פרט ספציפי מהפרופיל — לא גנרי
+- כתיבת follow-up למי שלא ענה (גרסה שונה מההודעה הראשונה)
+- A/B — שתי גרסאות שונות לאותו מועמד
+
+## טון
+Sales coach ישיר. אחרי כל הודעה מסביר בשורה אחת למה זה עובד.
+
+## כשפותחים שיחה
+שאל הכל בבת אחת:
+---
+📱 פלטפורמה: לינקדאין (עד 300 תווים) / WhatsApp?
+💼 המשרה: שם תפקיד + מה הכי מושך בה?
+👤 המועמדים: שם | תפקיד נוכחי | חברה | פרט בולט
+🎨 סגנון: רשמי / ישיר-ידידותי / קליל?
+---
+
+## תבנית — 3 משפטים בלבד
+1. ספציפי — "ראיתי ש[פרט אמיתי]"
+2. מה יש לך — "יש לי [תפקיד] ב[תחום]"
+3. CTA קל — "10 דקות השבוע?" / "רלוונטי?"
+
+## אחרי כל הודעה
+💡 "עובד כי: [סיבה ספציפית]"
+
+## מה לא לכתוב לעולם
+❌ "אני משוכנע/ת שתתאים/י בצורה מושלמת"
+❌ "תפקיד מדהים עם הזדמנויות פיתוח"
+❌ "שכר אטרקטיבי"
+❌ פסקה על החברה
+❌ יותר מ-4 שורות</div></div>
+</div>
+</div>
+
+<!-- ═══ TOOL 09 ═══ -->
+<div class="page">
+<div class="tool-page">
+  <div class="tool-header">
+    <div class="tool-badge purple-badge">📥</div>
+    <div class="tool-title-block">
+      <h2>כלי 09: תסריט קבלת מועמדים</h2>
+      <div class="cat-tag">💬 תקשורת · Auto-reply WhatsApp Business מוכן</div>
+    </div>
+  </div>
+
+  <div class="tool-meta">
+    <div class="meta-item">⏱ <strong>חוסך:</strong> 3 שעות שיחות מיון בשבוע</div>
+    <div class="meta-item">🔧 <strong>צריך:</strong> WhatsApp Business (חינם)</div>
+  </div>
+
+  <div class="section-label">הגדרה — פעם אחת</div>
+  <div class="example-box">
+    <strong>WhatsApp Business → Settings → Business Tools → Away message → הפעל</strong><br>
+    העתק את ההודעה למטה והדבק בשדה ההודעה.
+  </div>
+
+  <div class="section-label">ההודעה — העתק והדבק</div>
+  <div class="prompt-box">היי! 👋 תודה שפנית.
+
+אני [שם], מגייס/ת ב-[שם החברה/משרד].
+
+כדי שאוכל לעזור בצורה הכי טובה, ענה/י על 4 שאלות קצרות:
+
+1️⃣ באיזה תחום את/ה מחפש/ת עבודה?
+2️⃣ כמה שנות ניסיון יש לך בתחום?
+3️⃣ מה ציפיות השכר שלך? (ברוטו חודשי)
+4️⃣ מתי את/ה זמין/ה להתחיל?
+
+אחזור אליך תוך 24 שעות עם משרות רלוונטיות! 🙌</div>
+
+  <div class="section-label">דוגמת שימוש</div>
+  <div class="example-box">
+    <strong>מועמד שולח:</strong> "היי, ראיתי שאתם מגייסים"<br>
+    <strong>מקבל מיד:</strong> ההודעה האוטומטית עם 4 השאלות<br>
+    <strong>עונה:</strong> "פיתוח, 5 שנים, 30K, מיידי"<br>
+    <strong>אתה מקבל:</strong> תשובות מובנות — לוקח 10 שניות להחליט אם רלוונטי
+  </div>
+
+  <div class="tip-box">החלף [שם] ו-[שם החברה] בפרטים שלך לפני שמדביק. ה-4 שאלות נבחרו כי הן מספיקות לסינון ראשוני בלי להעמיס על המועמד.</div>
+</div>
+</div>
+
+<!-- ═══ TOOL 10 ═══ -->
+<div class="page">
+<div class="tool-page">
+  <div class="tool-header">
+    <div class="tool-badge coral-badge">🎁</div>
+    <div class="tool-title-block">
+      <h2>כלי 10: סורק קו"ח AI — בוט טלגרם</h2>
+      <div class="cat-tag">🎁 בונוס כלול · 40 קו"ח → Top 5 תוך 5 דקות</div>
+    </div>
+  </div>
+
+  <div class="tool-meta">
+    <div class="meta-item">⏱ <strong>חוסך:</strong> 6–7 שעות → 5 דקות</div>
+    <div class="meta-item">🔧 <strong>צריך:</strong> Telegram בלבד</div>
+  </div>
+
+  <div class="section-label">איך משתמשים</div>
+  <div class="example-box">
+    <strong>4 צעדים</strong>
+    1. פתח את הבוט בטלגרם (הלינק למטה)<br>
+    2. שלח דרישות משרה (חובה + יתרון)<br>
+    3. הדבק קורות חיים (טקסט, אפשר כמה ביחד)<br>
+    4. קבל: ציון 0–100 · חוזקות/חולשות · טבלת השוואה · שאלות לראיון
+  </div>
+
+  <div class="section-label">לינק לבוט</div>
+  <div class="link-box">
+    <span>בוט טלגרם מוכן לשימוש</span>
+    <a href="https://t.me/resumescrenerbot">t.me/resumescrenerbot ←</a>
+  </div>
+
+  <div class="tip-box">שלח מספר קורות חיים לאותה משרה — הבוט מחזיר טבלת השוואה מסודרת. עובד גם עם קו"ח באנגלית.</div>
+</div>
+</div>
+
+<!-- ═══ FINAL ═══ -->
+<div class="page">
+<div class="final-page">
+  <h2>הכלים מוכנים.<br>עכשיו מיישמים.</h2>
+  <p>יש שאלות? תקיעה בהגדרה? רוצה לבנות מערכת גיוס מותאמת אישית לעסק שלך?</p>
+  <a href="https://wa.me/9720546232063?text=היי+גיא,+קניתי+את+הערכה+ואני+צריך+עזרה" class="wa-btn">שלח הודעה ← WhatsApp</a>
+  <div class="author" style="color:rgba(255,255,255,0.4); font-size:12px; margin-top:16px;">© 2026 גיא כהן — יועץ AI לעסקים</div>
+  <div class="links">
+    <a href="https://guycohen-ai.co.il">guycohen-ai.co.il</a>
+    <a href="https://www.linkedin.com/in/guycohen-ai/">LinkedIn</a>
+    <a href="https://t.me/resumescrenerbot">בוט טלגרם</a>
+  </div>
+</div>
+</div>
 
 </body>
 </html>
